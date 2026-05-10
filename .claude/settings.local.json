@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(\"C:/Users/User/AppData/Local/Programs/Python/Launcher/py.exe\" --list)",
+      "Bash(\"C:/Users/User/AppData/Local/Programs/Python/Launcher/py.exe\" -c \"import sys; print\\(sys.executable\\)\")",
+      "Bash(pip install *)"
+    ]
+  }
+}
