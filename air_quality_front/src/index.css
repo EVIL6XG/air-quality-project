@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "leaflet/dist/leaflet.css";
+@keyframes cloudSpinJump {
+  /* старт */
+  0% {
+    transform: rotate(0deg) translateY(0);
+  }
+
+  /* половина оборота */
+  30% {
+    transform: rotate(180deg) translateY(-12px);
+  }
+
+  /* полный оборот + первый прыжок */
+  50% {
+    transform: rotate(360deg) translateY(0);
+  }
+
+  /* второй прыжок */
+  65% {
+    transform: rotate(360deg) translateY(-10px);
+  }
+
+  /* возврат */
+  80% {
+    transform: rotate(360deg) translateY(0);
+  }
+
+  /* стоп */
+  100% {
+    transform: rotate(360deg) translateY(0);
+  }
+}
+
+.animate-cloud-spin {
+  animation: cloudSpinJump 3s ease-out forwards;
+}
+

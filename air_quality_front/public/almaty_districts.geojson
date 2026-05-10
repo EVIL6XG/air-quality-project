@@ -1,0 +1,75 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "Bostandyk" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [76.882, 43.197],
+          [76.930, 43.197],
+          [76.930, 43.240],
+          [76.882, 43.240],
+          [76.882, 43.197]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Medeu" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [76.950, 43.210],
+          [77.020, 43.210],
+          [77.020, 43.270],
+          [76.950, 43.270],
+          [76.950, 43.210]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Auezov" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [76.830, 43.220],
+          [76.880, 43.220],
+          [76.880, 43.260],
+          [76.830, 43.260],
+          [76.830, 43.220]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Alatau" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [76.750, 43.180],
+          [76.820, 43.180],
+          [76.820, 43.240],
+          [76.750, 43.240],
+          [76.750, 43.180]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Jetisu" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [76.900, 43.260],
+          [76.950, 43.260],
+          [76.950, 43.300],
+          [76.900, 43.300],
+          [76.900, 43.260]
+        ]]
+      }
+    }
+  ]
+}

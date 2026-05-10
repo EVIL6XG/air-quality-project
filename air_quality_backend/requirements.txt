@@ -1,0 +1,13 @@
+flask
+flask-cors
+pg8000
+PyJWT
+werkzeug
+openai
+python-dateutil
+numpy
+pandas
+scikit-learn
+joblib
+xgboost
+lightgbm
