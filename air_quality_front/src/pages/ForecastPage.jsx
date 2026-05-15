@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { getForecast } from "../api/api";
+import { useState } from "react";
+import { useForecast } from "@/features/forecast/queries";
 import {
   ComposedChart, Line, Area, XAxis, YAxis,
   CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine,
@@ -41,35 +41,30 @@ function CustomTooltip({ active, payload, label }) {
 export default function ForecastPage() {
   const [districtId, setDistrictId] = useState(1);
   const [days, setDays] = useState(7);
-  const [chartData, setChartData] = useState([]);
-  const [forecastItems, setForecastItems] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+   const {
+  data,
+  isLoading: loading,
+  isError,
+} = useForecast(districtId, days);
 
-  useEffect(() => {
-    setLoading(true);
-    setError(null);
-    getForecast(districtId, days)
-      .then((res) => {
-        if (res.error) { setError(res.error); return; }
+const error = isError ? "Failed to connect to backend" : null;
 
-        const historyPoints = (res.history || []).map((h) => ({
-          date: h.date,
-          historical: h.pm25_median,
-        }));
+const historyPoints = (data?.history || []).map((h) => ({
+  date: h.date,
+  historical: h.pm25_median,
+}));
 
-        const forecastPoints = (res.forecast || []).map((f) => ({
-          date: f.date,
-          predicted: f.pm25_predicted,
-          band: [f.pm25_lower, f.pm25_upper],
-        }));
+const forecastPoints = (data?.forecast || []).map((f) => ({
+  date: f.date,
+  predicted: f.pm25_predicted,
+  band: [f.pm25_lower, f.pm25_upper],
+}));
 
-        setChartData([...historyPoints, ...forecastPoints]);
-        setForecastItems(res.forecast || []);
-      })
-      .catch(() => setError("Failed to connect to backend"))
-      .finally(() => setLoading(false));
-  }, [districtId, days]);
+const chartData = [...historyPoints, ...forecastPoints];
+
+const forecastItems = data?.forecast || [];
+
+
 
   const districtName = DISTRICTS.find((d) => d.id === districtId)?.name;
 

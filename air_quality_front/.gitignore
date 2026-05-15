@@ -69,6 +69,7 @@ web_modules/
 .env
 .env.*
 !.env.example
+!.env.development
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -159,6 +160,7 @@ vite.config.ts.timestamp-*
 # Environment variables
 .env
 *.env
+!.env.development
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

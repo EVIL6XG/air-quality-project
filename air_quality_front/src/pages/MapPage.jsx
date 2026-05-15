@@ -1,78 +1,125 @@
-import { useState } from "react";
-import AQIMap from "../components/AQIMap";
-import { Maximize2, Minimize2 } from "lucide-react";
+import { useState } from "react"
+import {
+  CalendarDays,
+  Layers3,
+  Maximize2,
+  Minimize2,
+  RadioTower,
+  Wind,
+} from "lucide-react"
+
+import AQIMap from "@/components/AQIMap"
+import { Badge } from "@/components/ui/badge"
+import { Card } from "@/components/ui/card"
+import { IconButton } from "@/components/ui/icon-button"
+
+const legend = [
+  ["#22c55e", "Good"],
+  ["#eab308", "Moderate"],
+  ["#f97316", "Sensitive"],
+  ["#ef4444", "Unhealthy"],
+  ["#881337", "Hazardous"],
+]
 
 export default function MapPage() {
-  const [selectedDate, setSelectedDate] = useState("2024-12-24");
-  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState("2024-12-24")
+  const [isFullscreen, setIsFullscreen] = useState(false)
 
   if (isFullscreen) {
     return (
-      <div className="fixed inset-0 z-[999] bg-white dark:bg-[#0F1117]">
-        <button
+      <div className="fixed inset-0 z-[999] bg-surface-0">
+        <IconButton
+          type="button"
           onClick={() => setIsFullscreen(false)}
-          className="absolute top-4 right-4 z-[1000] p-2 bg-white dark:bg-[#1A1D2E] rounded-xl shadow-lg border dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition"
+          className="glass absolute right-4 top-4 z-[1000]"
+          aria-label="Exit fullscreen"
         >
           <Minimize2 size={20} />
-        </button>
-        <AQIMap selectedDate={selectedDate} fullHeight={false} fullscreen />
+        </IconButton>
+        <AQIMap selectedDate={selectedDate} fullscreen />
       </div>
-    );
+    )
   }
 
   return (
-    <div className="p-6 space-y-4 h-full flex flex-col">
-      {/* HEADER & FILTERS */}
-      <div className="flex flex-wrap items-center justify-between gap-6 bg-white dark:bg-[#1A1D2E] p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
-        <div>
-          <h2 className="font-bold text-xl text-gray-800 dark:text-gray-100">Almaty Air Pollution Map</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400">PM₂.₅ levels: Daily Historical Data</p>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-4 bg-gray-50 dark:bg-gray-800 p-2 rounded-xl border dark:border-gray-700">
-            <label className="text-xs font-bold text-gray-400 px-2 uppercase">Select Date</label>
-            <input
-              type="date"
-              value={selectedDate}
-              onChange={(e) => setSelectedDate(e.target.value)}
-              className="bg-transparent outline-none text-sm font-medium cursor-pointer text-gray-800 dark:text-gray-200"
-            />
+    <div className="space-y-5">
+      <Card className="atmos-card rounded-[2rem] p-5">
+        <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-center">
+          <div>
+            <Badge className="mb-4 border-cyan-200/30 bg-cyan-200/15 text-cyan-700 dark:text-cyan-100">
+              <RadioTower size={14} />
+              map-first experience
+            </Badge>
+            <h1 className="font-display text-4xl font-bold">Almaty live map</h1>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-text-secondary">
+              Readable street map with labels, AQI heatmap, district borders,
+              live station markers, mouse hover states, and full zoom controls.
+            </p>
           </div>
 
-          <button
-            onClick={() => setIsFullscreen(true)}
-            className="p-2.5 bg-gray-50 dark:bg-gray-800 rounded-xl border dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
-            title="Fullscreen"
-          >
-            <Maximize2 size={18} />
-          </button>
+          <div className="flex flex-wrap items-center gap-3">
+            <label className="glass flex h-11 items-center gap-3 rounded-xl px-4">
+              <CalendarDays size={16} className="text-accent" />
+              <input
+                type="date"
+                value={selectedDate}
+                onChange={(event) => setSelectedDate(event.target.value)}
+                className="bg-transparent text-sm outline-none"
+              />
+            </label>
+            <IconButton
+              type="button"
+              onClick={() => setIsFullscreen(true)}
+              className="glass"
+              aria-label="Fullscreen"
+            >
+              <Maximize2 size={18} />
+            </IconButton>
+          </div>
         </div>
-      </div>
+      </Card>
 
-      {/* MAP */}
-      <div className="flex-1 bg-white dark:bg-[#1A1D2E] p-2 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-800 overflow-hidden relative min-h-[500px]">
-        <AQIMap selectedDate={selectedDate} fullHeight />
-      </div>
+      <section className="grid gap-5 2xl:grid-cols-[minmax(0,1fr)_300px]">
+        <Card className="atmos-card rounded-[2rem] p-2">
+          <AQIMap selectedDate={selectedDate} fullHeight />
+        </Card>
 
-      {/* LEGEND */}
-      <div className="flex flex-wrap gap-4 px-2">
-        <div className="flex items-center gap-2 text-xs font-medium text-gray-500 dark:text-gray-400">
-          <span className="w-3 h-3 rounded-full bg-[#00e400]"></span> Good
+        <div className="space-y-5">
+          <Card className="atmos-card rounded-[2rem] p-5">
+            <Layers3 className="mb-4 text-accent" size={22} />
+            <h2 className="font-display text-xl font-bold">Weather overlays</h2>
+            <div className="mt-4 space-y-3">
+              {["Readable labels", "AQI heatmap", "District borders", "Station markers"].map(
+                (item) => (
+                  <div
+                    key={item}
+                    className="flex items-center justify-between rounded-xl border border-white/10 bg-white/10 px-4 py-3"
+                  >
+                    <span className="text-sm">{item}</span>
+                    <span className="pulse-live h-2.5 w-2.5 rounded-full bg-cyan-300" />
+                  </div>
+                ),
+              )}
+            </div>
+          </Card>
+
+          <Card className="atmos-card rounded-[2rem] p-5">
+            <Wind className="mb-4 text-accent" size={22} />
+            <h2 className="font-display text-xl font-bold">AQI legend</h2>
+            <div className="mt-4 space-y-3">
+              {legend.map(([color, label]) => (
+                <div key={label} className="flex items-center gap-3 text-sm">
+                  <span
+                    className="h-3 w-3 rounded-full shadow-[0_0_18px_currentColor]"
+                    style={{ backgroundColor: color, color }}
+                  />
+                  <span className="text-text-secondary">{label}</span>
+                </div>
+              ))}
+            </div>
+          </Card>
         </div>
-        <div className="flex items-center gap-2 text-xs font-medium text-gray-500 dark:text-gray-400">
-          <span className="w-3 h-3 rounded-full bg-[#ffff00]"></span> Moderate
-        </div>
-        <div className="flex items-center gap-2 text-xs font-medium text-gray-500 dark:text-gray-400">
-          <span className="w-3 h-3 rounded-full bg-[#ff7e00]"></span> Unhealthy for Sensitive
-        </div>
-        <div className="flex items-center gap-2 text-xs font-medium text-gray-500 dark:text-gray-400">
-          <span className="w-3 h-3 rounded-full bg-[#ff0000]"></span> Unhealthy
-        </div>
-        <div className="flex items-center gap-2 text-xs font-medium text-gray-500 dark:text-gray-400">
-          <span className="w-3 h-3 rounded-full bg-[#7e0023]"></span> Hazardous
-        </div>
-      </div>
+      </section>
     </div>
-  );
+  )
 }

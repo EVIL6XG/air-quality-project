@@ -1,16 +1,13 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import { Menu, X, ChevronLeft, ChevronRight } from "lucide-react";
-import { useTheme } from "../context/ThemeContext";
 
 export default function AppLayout({ children }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [desktopOpen, setDesktopOpen] = useState(true);
-  const { dark } = useTheme();
 
   return (
-    <div className={dark ? "dark" : ""}>
-      <div className="flex h-screen bg-[#F8FAFC] dark:bg-[#0F1117] overflow-hidden relative">
+    <div className="flex h-screen bg-[#F8FAFC] dark:bg-[#0F1117] overflow-hidden relative">
 
         {/* МОБИЛЬНЫЙ БУРГЕР */}
         <button
@@ -65,7 +62,6 @@ export default function AppLayout({ children }) {
             {children}
           </div>
         </main>
-      </div>
     </div>
   );
 }

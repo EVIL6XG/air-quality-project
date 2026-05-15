@@ -1,8 +1,11 @@
+import os
+from dotenv import load_dotenv
 from openai import OpenAI
 import json
 from db import get_connection
 import datetime
 from dateutil.parser import parse
+
 
 DISTRICTS = {
     "бостандык": 1,
@@ -114,8 +117,9 @@ functions = [
     }
 ]
 
+load_dotenv()
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-client = OpenAI(api_key="OPENAI_API_KEY")
 
 def ai_answer(user_message: str):
 

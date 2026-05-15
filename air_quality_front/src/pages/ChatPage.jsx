@@ -1,13 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { sendMessageToAI } from "../api/chatApi";
+import { useSendChat } from "@/features/chat/queries";
 import { Send } from "lucide-react";
+import { Button } from "../components/ui/Button";
 
 export default function ChatPage() {
   const navigate = useNavigate();
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const chatMutation = useSendChat();
+const loading = chatMutation.isPending;
   const bottomRef = useRef(null);
 
   useEffect(() => {
@@ -15,20 +17,27 @@ export default function ChatPage() {
   }, [messages]);
 
   async function handleSend() {
-    if (!input.trim() || loading) return;
-    const userMessage = { role: "user", text: input };
-    setMessages((prev) => [...prev, userMessage]);
-    setInput("");
-    setLoading(true);
-    try {
-      const res = await sendMessageToAI(input);
-      setMessages((prev) => [...prev, { role: "bot", text: res.response }]);
-    } catch {
-      setMessages((prev) => [...prev, { role: "bot", text: "Error connecting to AI." }]);
-    } finally {
-      setLoading(false);
-    }
+  if (!input.trim() || loading) return;
+
+  const text = input;
+  const userMessage = { role: "user", text };
+
+  setMessages((prev) => [...prev, userMessage]);
+  setInput("");
+
+  try {
+    const res = await chatMutation.mutateAsync(text);
+    setMessages((prev) => [
+      ...prev,
+      { role: "bot", text: res.response || res.answer || "No response received." },
+    ]);
+  } catch {
+    setMessages((prev) => [
+      ...prev,
+      { role: "bot", text: "Error connecting to AI." },
+    ]);
   }
+}
 
   function handleKey(e) {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -90,13 +99,13 @@ export default function ChatPage() {
             className="flex-1 border dark:border-gray-700 rounded-xl px-4 py-2.5 text-sm bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-600 outline-none focus:ring-2 focus:ring-[#5B5BD6]"
             placeholder="Ask about air quality in Almaty..."
           />
-          <button
-            onClick={handleSend}
-            disabled={loading}
-            className="bg-[#5B5BD6] hover:bg-[#4A4ABF] disabled:opacity-50 text-white px-4 py-2.5 rounded-xl transition flex items-center gap-2"
-          >
-            <Send size={16} />
-          </button>
+          <Button
+      onClick={handleSend}
+  disabled={loading}
+  className="rounded-xl"
+>
+  <Send size={16} />
+</Button>
         </div>
       </div>
     </div>

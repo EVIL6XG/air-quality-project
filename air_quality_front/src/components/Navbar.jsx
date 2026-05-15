@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
   LogOut,
   Map,
@@ -9,18 +9,17 @@ import {
   Moon,
   UserCircle,
 } from "lucide-react";
-import { useTheme } from "../context/ThemeContext";
-import { useAuth } from "../context/AuthContext";
+import { useTheme } from "../providers/theme-provider";
+import { useAuth } from "../providers/auth-provider";
 
 function Navbar({ onClose }) {
-  const navigate = useNavigate();
-  const { dark, toggle } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   const { logout } = useAuth();
+  const dark = theme === "dark";
 
   function handleLogout() {
     logout();
     if (onClose) onClose();
-    navigate("/login");
   }
 
   const linkBase = "flex items-center gap-3 px-4 py-2 rounded-xl text-sm font-medium transition-colors";
@@ -89,7 +88,7 @@ function Navbar({ onClose }) {
 
         {/* Theme Toggle */}
         <button
-          onClick={toggle}
+          onClick={toggleTheme}
           className={`${linkBase} w-full text-gray-700 dark:text-gray-300 hover:bg-[#F0F1FF] dark:hover:bg-[#2D3150]`}
         >
           {dark ? <Sun size={18} /> : <Moon size={18} />}
