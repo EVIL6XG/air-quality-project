@@ -1,15 +1,20 @@
 import { Link, useLocation } from "react-router-dom"
 import {
   Bell,
+  BookOpen,
   Bot,
   ChevronLeft,
   ChevronRight,
+  HeartPulse,
   Home,
   LayoutDashboard,
   LogOut,
   Map,
   Moon,
+  Newspaper,
   Search,
+  Settings,
+  ShoppingBag,
   Sun,
   TrendingUp,
   User,
@@ -26,7 +31,25 @@ const navItems = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/map", label: "Map", icon: Map },
   { to: "/forecast", label: "Forecast", icon: TrendingUp },
+  { to: "/analytics", label: "Analytics", icon: HeartPulse },
   { to: "/chat", label: "AI Chat", icon: Bot },
+  { to: "/profile", label: "Profile", icon: User },
+  { to: "/settings", label: "Settings", icon: Settings },
+]
+
+const publicItems = [
+  { to: "/news", label: "News", icon: Newspaper },
+  { to: "/learn", label: "Learn", icon: BookOpen },
+  { to: "/support", label: "Support", icon: HeartPulse },
+  { to: "/shop", label: "Shop", icon: ShoppingBag },
+]
+
+const mobileItems = [
+  { to: "/dashboard", label: "Home", icon: LayoutDashboard },
+  { to: "/map", label: "Map", icon: Map },
+  { to: "/forecast", label: "Forecast", icon: TrendingUp },
+  { to: "/analytics", label: "History", icon: HeartPulse },
+  { to: "/chat", label: "AI", icon: Bot },
   { to: "/profile", label: "Profile", icon: User },
 ]
 
@@ -34,8 +57,10 @@ const routeTitles = {
   "/dashboard": "Dashboard",
   "/map": "Air Quality Map",
   "/forecast": "Forecast",
+  "/analytics": "Historical Analytics",
   "/chat": "AI Assistant",
   "/profile": "Profile",
+  "/settings": "Settings",
 }
 
 export default function AppShell({ children }) {
@@ -77,6 +102,35 @@ export default function AppShell({ children }) {
 
         <nav className="flex-1 space-y-1 px-2 py-4">
           {navItems.map((item) => {
+            const Icon = item.icon
+            const active = location.pathname === item.to
+
+            return (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={cn(
+                  "flex h-10 items-center gap-3 rounded-lg px-3 text-sm font-medium text-text-secondary transition-colors hover:bg-surface-2 hover:text-text-primary",
+                  active && "bg-accent/10 text-accent",
+                  !sidebarOpen && "justify-center px-0",
+                )}
+                title={!sidebarOpen ? item.label : undefined}
+              >
+                <Icon size={18} />
+                {sidebarOpen && <span>{item.label}</span>}
+              </Link>
+            )
+          })}
+
+          <div className="px-3 pt-5">
+            {sidebarOpen && (
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-text-muted">
+                Explore
+              </p>
+            )}
+          </div>
+
+          {publicItems.map((item) => {
             const Icon = item.icon
             const active = location.pathname === item.to
 
@@ -165,7 +219,7 @@ export default function AppShell({ children }) {
       </div>
 
       <nav className="glass fixed inset-x-3 bottom-3 z-40 grid grid-cols-6 rounded-xl p-1 shadow-lg md:hidden">
-        {navItems.map((item) => {
+        {mobileItems.map((item) => {
           const Icon = item.icon
           const active = location.pathname === item.to
 

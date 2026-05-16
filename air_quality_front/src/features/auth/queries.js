@@ -54,3 +54,15 @@ export function useRegister() {
     mutationFn: (payload) => post("/auth/register", payload),
   })
 }
+
+export function useForgotPassword() {
+  return useMutation({
+    mutationFn: (payload) => post("/auth/forgot-password", payload),
+  })
+}
+
+export function useResetPassword() {
+  return useMutation({
+    mutationFn: (payload) => post("/auth/reset-password", payload),
+  })
+}

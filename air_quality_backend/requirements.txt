@@ -5,6 +5,7 @@ PyJWT
 werkzeug
 openai
 python-dateutil
+python-dotenv
 numpy
 pandas
 scikit-learn

@@ -6,7 +6,15 @@ from queries import (get_latest_aqi_per_district, get_aqi_by_date_and_district,
                      get_aqi_by_date, get_all_districts, get_aqi_history, get_pm25_history, get_stats_summary)
 from ai import ai_answer
 from forecast import get_forecast, get_recent_history
-from auth import register_user, login_user, get_user_from_token, update_user_profile, update_user_avatar
+from auth import (
+    get_user_from_token,
+    login_user,
+    register_user,
+    request_password_reset,
+    reset_password,
+    update_user_avatar,
+    update_user_profile,
+)
 
 UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), "uploads")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -114,6 +122,37 @@ def login():
     if error:
         return jsonify({"error": error}), 401
     return jsonify({"token": token})
+
+
+@app.route("/api/auth/forgot-password", methods=["POST"])
+def forgot_password():
+    data = request.get_json()
+    email = (data or {}).get("email", "").strip()
+
+    if not email:
+        return jsonify({"error": "email is required"}), 400
+
+    result, error = request_password_reset(email)
+    if error:
+        return jsonify({"error": error}), 400
+    return jsonify(result)
+
+
+@app.route("/api/auth/reset-password", methods=["POST"])
+def reset_user_password():
+    data = request.get_json()
+    token = (data or {}).get("token", "").strip()
+    password = (data or {}).get("password", "")
+
+    if not token or not password:
+        return jsonify({"error": "token and password are required"}), 400
+    if len(password) < 8:
+        return jsonify({"error": "Password must be at least 8 characters"}), 400
+
+    ok, error = reset_password(token, password)
+    if error:
+        return jsonify({"error": error}), 400
+    return jsonify({"ok": ok})
 
 
 @app.route("/api/auth/me")

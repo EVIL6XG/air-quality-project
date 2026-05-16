@@ -4,10 +4,18 @@ import { useSendChat } from "@/features/chat/queries";
 import { Send } from "lucide-react";
 import { Button } from "../components/ui/Button";
 
+const initialMessages = [
+  {
+    role: "bot",
+    text:
+      "Hello! I am the AirQ AI Assistant. Ask me a question about Almaty air quality, AQI, PM2.5, a district, or a specific date, and I will help you understand the data.",
+  },
+];
+
 export default function ChatPage() {
   const navigate = useNavigate();
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState(initialMessages);
   const chatMutation = useSendChat();
 const loading = chatMutation.isPending;
   const bottomRef = useRef(null);
@@ -62,11 +70,6 @@ const loading = chatMutation.isPending;
       <div className="flex-1 bg-white dark:bg-[#1A1D2E] rounded-2xl shadow-sm border dark:border-gray-800 flex flex-col p-4 h-[72vh]">
         {/* Messages */}
         <div className="flex-1 overflow-y-auto space-y-3 pr-1">
-          {messages.length === 0 && (
-            <div className="h-full flex items-center justify-center text-gray-400 dark:text-gray-600 text-sm">
-              Ask me anything about air quality in Almaty...
-            </div>
-          )}
           {messages.map((msg, i) => (
             <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
               <div

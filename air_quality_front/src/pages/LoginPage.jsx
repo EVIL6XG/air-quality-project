@@ -133,9 +133,9 @@ export default function LoginPage() {
               </div>
 
               <div className="mt-3 text-right">
-                <button type="button" className="text-sm font-medium text-accent">
+                <Link to="/forgot-password" className="text-sm font-medium text-accent">
                   Forgot password?
-                </button>
+                </Link>
               </div>
 
               {error && (

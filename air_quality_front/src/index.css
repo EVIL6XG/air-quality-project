@@ -491,3 +491,2924 @@ body {
   box-shadow: 0 18px 40px rgb(8 47 73 / 0.22);
   backdrop-filter: blur(18px);
 }
+
+.airq-landing {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #06111f;
+  color: white;
+}
+
+.airq-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: minmax(4rem, 1fr) auto minmax(4rem, 1fr);
+  align-items: center;
+  gap: 1rem;
+  padding: clamp(1rem, 2.2vw, 1.75rem) clamp(1rem, 4vw, 3.5rem);
+}
+
+.airq-wordmark {
+  width: fit-content;
+  font-family: Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(1.6rem, 2.8vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: transparent;
+  background:
+    linear-gradient(135deg, #ffffff 0%, #e0f2fe 34%, #7dd3fc 62%, #c4b5fd 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-decoration: none;
+  text-shadow:
+    0 8px 32px rgb(0 0 0 / 0.42),
+    0 0 20px rgb(125 211 252 / 0.26);
+  transition:
+    filter 180ms ease,
+    text-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.airq-wordmark:hover,
+.airq-wordmark:focus-visible {
+  filter: brightness(1.12) saturate(1.1);
+  text-shadow:
+    0 8px 32px rgb(0 0 0 / 0.42),
+    0 0 14px rgb(224 242 254 / 0.55),
+    0 0 36px rgb(56 189 248 / 0.42);
+  transform: translateY(-1px);
+}
+
+.airq-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.25rem, 1vw, 0.75rem);
+  min-height: 3rem;
+  padding: 0.35rem;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 999px;
+  background: rgb(7 20 34 / 0.38);
+  box-shadow: 0 20px 60px rgb(0 0 0 / 0.24);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.airq-nav a,
+.airq-nav-link,
+.airq-search {
+  position: relative;
+  display: inline-flex;
+  height: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgb(255 255 255 / 0.76);
+  font-size: 1rem;
+  font-weight: 650;
+  letter-spacing: 0;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease,
+    text-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.airq-nav a {
+  padding: 0 0.85rem;
+}
+
+.airq-nav-link {
+  padding: 0 0.85rem;
+}
+
+.airq-search {
+  width: 2.25rem;
+  cursor: pointer;
+}
+
+.airq-nav a:hover,
+.airq-nav a:focus-visible,
+.airq-nav-link:hover,
+.airq-nav-link:focus-visible,
+.airq-nav-link[data-state="open"],
+.airq-search:hover,
+.airq-search:focus-visible {
+  background: rgb(255 255 255 / 0.12);
+  color: white;
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.12),
+    0 0 18px rgb(125 211 252 / 0.22),
+    0 0 34px rgb(59 130 246 / 0.18);
+  text-shadow:
+    0 0 10px rgb(224 242 254 / 0.66),
+    0 0 26px rgb(56 189 248 / 0.44);
+  transform: translateY(-1px);
+}
+
+.airq-nav a:active,
+.airq-nav-link:active,
+.airq-search:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow:
+    inset 0 0 0 1px rgb(125 211 252 / 0.3),
+    0 0 24px rgb(125 211 252 / 0.32);
+}
+
+.airq-menu-content {
+  min-width: 15rem;
+  border-color: rgb(255 255 255 / 0.14);
+  border-radius: 1.15rem;
+  background:
+    linear-gradient(145deg, rgb(8 20 35 / 0.94), rgb(13 31 52 / 0.9));
+  padding: 0.55rem;
+  color: white;
+  box-shadow:
+    0 28px 72px rgb(0 0 0 / 0.34),
+    0 0 42px rgb(56 189 248 / 0.14),
+    inset 0 1px 0 rgb(255 255 255 / 0.1);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.airq-menu-label {
+  padding: 0.55rem 0.7rem 0.35rem;
+  color: rgb(125 211 252 / 0.9);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.airq-menu-item {
+  min-height: 2.45rem;
+  border-radius: 0.85rem;
+  color: rgb(226 232 240 / 0.86);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.airq-menu-item:focus,
+.airq-menu-item:hover {
+  background: rgb(255 255 255 / 0.1);
+  color: white;
+  box-shadow:
+    inset 0 0 0 1px rgb(125 211 252 / 0.14),
+    0 0 22px rgb(125 211 252 / 0.16);
+}
+
+.airq-info-page {
+  position: relative;
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  overflow: hidden;
+  padding: 2rem;
+  background: #06111f;
+}
+
+.airq-info-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgb(4 12 24 / 0.12), rgb(4 12 24 / 0.72)),
+    url("/almaty-mountain-smog-hero.png");
+  background-position: center;
+  background-size: cover;
+  filter: saturate(1.08) contrast(1.04);
+  transform: scale(1.04);
+}
+
+.airq-info-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 42%, rgb(125 211 252 / 0.18), transparent 28rem),
+    linear-gradient(135deg, rgb(6 17 31 / 0.82), rgb(6 17 31 / 0.34));
+}
+
+.airq-info-card {
+  position: relative;
+  z-index: 1;
+  width: min(48rem, 100%);
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 2rem;
+  background: rgb(8 20 35 / 0.72);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  box-shadow:
+    0 34px 90px rgb(0 0 0 / 0.38),
+    0 0 42px rgb(56 189 248 / 0.14);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.airq-info-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgb(226 232 240 / 0.78);
+  font-size: 0.92rem;
+  font-weight: 650;
+  text-decoration: none;
+  transition: color 180ms ease, text-shadow 180ms ease;
+}
+
+.airq-info-back:hover {
+  color: white;
+  text-shadow: 0 0 22px rgb(125 211 252 / 0.45);
+}
+
+.airq-info-kicker {
+  margin: 3rem 0 1rem;
+  color: rgb(125 211 252 / 0.9);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.airq-info-card h1 {
+  margin: 0;
+  font-family: Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(2.4rem, 7vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.96;
+}
+
+.airq-info-card > p:last-child {
+  margin: 1.35rem 0 0;
+  max-width: 42rem;
+  color: rgb(226 232 240 / 0.82);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.75;
+}
+
+.airq-mission-page {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #06111f;
+}
+
+.airq-mission-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(115deg, transparent 0 18%, rgb(125 211 252 / 0.035) 22%, transparent 34%),
+    linear-gradient(rgb(255 255 255 / 0.024) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.024) 1px, transparent 1px);
+  background-size: auto, 96px 96px, 96px 96px;
+  mask-image: radial-gradient(ellipse at 58% 34%, #000 0 38%, transparent 74%);
+  animation: missionGridDrift 22s ease-in-out infinite alternate;
+}
+
+.airq-mission-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(180deg, rgb(4 12 24 / 0.46), rgb(4 12 24 / 0.82) 62%, rgb(4 12 24 / 0.98)),
+    radial-gradient(ellipse at 78% 20%, rgb(34 211 238 / 0.12), transparent 30rem),
+    radial-gradient(ellipse at 20% 68%, rgb(74 222 128 / 0.07), transparent 29rem),
+    url("/almaty-mountain-smog-hero.png");
+  background-position: center;
+  background-size: cover;
+  transform: scale(1.03);
+}
+
+.airq-mission-bg::after {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  opacity: 0.38;
+  background:
+    radial-gradient(ellipse at 18% 42%, rgb(226 232 240 / 0.08), transparent 28rem),
+    radial-gradient(ellipse at 72% 55%, rgb(125 211 252 / 0.1), transparent 30rem),
+    linear-gradient(102deg, transparent 0 36%, rgb(255 255 255 / 0.055) 44%, transparent 56%);
+  filter: blur(28px);
+  animation: windDrift 24s linear infinite alternate;
+}
+
+.airq-mission-hero,
+.airq-mission-section,
+.airq-mission-cta {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.airq-mission-hero {
+  min-height: 100svh;
+  padding: clamp(5.5rem, 7vw, 6.5rem) 0 1.25rem;
+}
+
+.airq-mission-back {
+  position: absolute;
+  left: 0;
+  top: clamp(1.25rem, 3vw, 2rem);
+  display: grid;
+  height: 2.6rem;
+  width: 2.6rem;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 999px;
+  background: rgb(5 18 35 / 0.42);
+  backdrop-filter: blur(14px);
+}
+
+.airq-mission-hero-copy {
+  max-width: 35.5rem;
+}
+
+.airq-mission-hero-copy .airq-info-kicker,
+.airq-mission-statement .airq-info-kicker,
+.airq-mission-tech .airq-info-kicker {
+  margin-top: 0;
+}
+
+.airq-mission-hero h1,
+.airq-mission-section h2,
+.airq-mission-cta h2 {
+  margin: 0;
+  font-family: Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 0.98;
+}
+
+.airq-mission-hero h1 {
+  max-width: 34rem;
+  font-size: clamp(2.6rem, 4.9vw, 5.25rem);
+  line-height: 1.04;
+  text-shadow: 0 18px 52px rgb(0 0 0 / 0.38);
+}
+
+.airq-mission-hero h1 span {
+  color: rgb(147 197 253);
+}
+
+.airq-mission-hero-copy > p:last-of-type,
+.airq-mission-section p {
+  max-width: 36rem;
+  color: rgb(226 232 240 / 0.76);
+  font-size: clamp(0.98rem, 1.18vw, 1.08rem);
+  line-height: 1.75;
+}
+
+.airq-mission-hero-copy > p:last-of-type {
+  margin-top: 1.35rem;
+}
+
+.mission-reference-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.03fr) minmax(24rem, 0.92fr);
+  grid-template-areas:
+    "copy impact"
+    "drivers impact"
+    "features features";
+  gap: clamp(1.25rem, 2.4vw, 2.25rem);
+  align-items: start;
+}
+
+.mission-reference-grid .airq-mission-hero-copy {
+  grid-area: copy;
+}
+
+.mission-impact-panel {
+  grid-area: impact;
+  align-self: start;
+  margin-top: 2.5rem;
+}
+
+.mission-drivers {
+  grid-area: drivers;
+  margin-top: clamp(0.8rem, 2vw, 1.4rem);
+}
+
+.mission-drivers > p {
+  margin: 0 0 1.15rem;
+  color: rgb(147 197 253);
+  font-size: 0.8rem;
+  font-weight: 850;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.mission-driver-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.95rem;
+}
+
+.mission-driver-grid article {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.75rem;
+  border-right: 1px solid rgb(255 255 255 / 0.09);
+  padding-right: 0.95rem;
+}
+
+.mission-driver-grid article:last-child {
+  border-right: 0;
+}
+
+.mission-driver-icon {
+  display: grid;
+  height: 2.2rem;
+  width: 2.2rem;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: 999px;
+  background: rgb(96 165 250 / 0.12);
+  color: rgb(147 197 253);
+}
+
+.mission-driver-grid h3 {
+  margin: 0;
+  font-size: 0.96rem;
+  font-weight: 800;
+}
+
+.mission-driver-grid span {
+  display: block;
+  margin-top: 0.65rem;
+  color: rgb(226 232 240 / 0.68);
+  font-size: 0.78rem;
+  line-height: 1.65;
+}
+
+.airq-mission-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 2rem;
+}
+
+.airq-mission-primary {
+  border-radius: 999px;
+  background:
+    linear-gradient(135deg, rgb(34 211 238), rgb(74 222 128));
+  color: #04111f;
+  box-shadow:
+    0 0 18px rgb(34 211 238 / 0.18),
+    0 14px 34px rgb(0 0 0 / 0.22);
+}
+
+.airq-mission-primary:hover {
+  filter: brightness(1.08);
+}
+
+.airq-mission-secondary {
+  border-color: rgb(255 255 255 / 0.14);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.1);
+  color: white;
+  backdrop-filter: blur(18px);
+}
+
+.airq-mission-visual {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: auto;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(ellipse at 72% 0%, rgb(96 165 250 / 0.1), transparent 22rem),
+    linear-gradient(145deg, rgb(255 255 255 / 0.12), rgb(255 255 255 / 0.045));
+  padding: clamp(1rem, 2vw, 1.35rem);
+  box-shadow:
+    0 24px 70px rgb(0 0 0 / 0.24),
+    inset 0 1px 0 rgb(255 255 255 / 0.12);
+  overflow: hidden;
+  backdrop-filter: blur(18px);
+}
+
+.airq-mission-visual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgb(255 255 255 / 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.022) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(circle at 58% 38%, #000, transparent 72%);
+}
+
+.airq-mission-visual::after {
+  content: "";
+  position: absolute;
+  inset: auto -8% -16% -8%;
+  height: 40%;
+  background:
+    radial-gradient(ellipse at 50% 65%, rgb(125 211 252 / 0.08), transparent 48%),
+    linear-gradient(180deg, transparent, rgb(8 20 35 / 0.32));
+  filter: blur(18px);
+}
+
+.mission-product-header,
+.mission-aqi-card,
+.mission-metrics-grid,
+.mission-chart-card,
+.mission-recommendation {
+  position: relative;
+  z-index: 1;
+}
+
+.mission-product-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid rgb(255 255 255 / 0.08);
+  padding-bottom: 0.45rem;
+}
+
+.mission-product-header span,
+.mission-aqi-score span,
+.mission-metrics-grid span {
+  display: block;
+  color: rgb(226 232 240 / 0.58);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mission-product-header strong {
+  display: block;
+  margin-top: 0.25rem;
+  color: white;
+  font-family: Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.mission-product-header em {
+  flex: 0 0 auto;
+  border: 1px solid rgb(125 211 252 / 0.22);
+  border-radius: 999px;
+  background: rgb(14 165 233 / 0.08);
+  color: rgb(186 230 253 / 0.86);
+  padding: 0.4rem 0.62rem;
+  font-size: 0.68rem;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.mission-impact-chart {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 5.25rem minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: 0.95rem;
+  background: rgb(5 18 35 / 0.34);
+  padding: 0.85rem;
+}
+
+.mission-impact-score span {
+  display: block;
+  color: white;
+  font-size: 0.92rem;
+  font-weight: 750;
+}
+
+.mission-impact-score small {
+  display: block;
+  margin-top: 0.2rem;
+  color: rgb(226 232 240 / 0.62);
+  font-size: 0.74rem;
+}
+
+.mission-impact-score strong {
+  display: block;
+  margin-top: 0.55rem;
+  color: rgb(134 239 172);
+  font-family: Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 0.96;
+}
+
+.mission-impact-score em {
+  display: block;
+  margin-top: 0.35rem;
+  color: rgb(134 239 172);
+  font-size: 0.78rem;
+  font-style: normal;
+}
+
+.mission-chart-preview {
+  min-width: 0;
+}
+
+.mission-chart-caption {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.3rem;
+}
+
+.mission-chart-caption span {
+  color: white;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.mission-chart-caption small {
+  color: rgb(226 232 240 / 0.52);
+  font-size: 0.68rem;
+  text-align: right;
+}
+
+.mission-impact-chart svg {
+  width: 100%;
+  height: 8.8rem;
+  overflow: visible;
+}
+
+.mission-chart-grid path {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.06);
+  stroke-width: 1;
+}
+
+.mission-impact-line {
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.mission-impact-line-history {
+  stroke: rgb(134 239 172);
+  filter: drop-shadow(0 0 8px rgb(74 222 128 / 0.24));
+}
+
+.mission-impact-line-forecast {
+  stroke: rgb(125 211 252);
+  stroke-dasharray: 8 8;
+  filter: drop-shadow(0 0 8px rgb(56 189 248 / 0.2));
+}
+
+.mission-impact-chart circle {
+  fill: rgb(187 247 208);
+  stroke: rgb(5 18 35);
+  stroke-width: 2;
+}
+
+.mission-chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 0.9rem;
+  margin-top: 0.25rem;
+}
+
+.mission-chart-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: rgb(226 232 240 / 0.58);
+  font-size: 0.66rem;
+  font-weight: 700;
+}
+
+.mission-chart-legend i {
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: rgb(134 239 172);
+}
+
+.mission-chart-legend span:nth-child(2) i {
+  background: rgb(125 211 252);
+}
+
+.mission-sensor-row {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  border: 1px solid rgb(255 255 255 / 0.08);
+  border-radius: 0.9rem;
+  background: rgb(255 255 255 / 0.045);
+  overflow: hidden;
+}
+
+.mission-sensor-row div {
+  min-width: 0;
+  border-right: 1px solid rgb(255 255 255 / 0.07);
+  padding: 0.72rem 0.5rem;
+  text-align: center;
+}
+
+.mission-sensor-row div:last-child {
+  border-right: 0;
+}
+
+.mission-sensor-row span,
+.mission-sensor-row small {
+  display: block;
+  color: rgb(226 232 240 / 0.58);
+  font-size: 0.64rem;
+}
+
+.mission-sensor-row strong {
+  display: block;
+  margin: 0.18rem 0;
+  color: white;
+  font-size: 0.96rem;
+  line-height: 1;
+}
+
+.airq-shop-page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 14% 8%, rgb(168 85 247 / 0.24), transparent 30rem),
+    radial-gradient(circle at 88% 18%, rgb(45 212 191 / 0.14), transparent 34rem),
+    radial-gradient(circle at 48% 92%, rgb(76 29 149 / 0.28), transparent 34rem),
+    linear-gradient(135deg, #050817 0%, #08111f 43%, #130b2c 100%);
+  color: white;
+  padding: clamp(1rem, 2.4vw, 2rem);
+}
+
+.shop-bg,
+.shop-bg-image {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+}
+
+.shop-bg {
+  background:
+    linear-gradient(rgb(255 255 255 / 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.025) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(to bottom, transparent, black 18%, black 78%, transparent);
+}
+
+.shop-bg-image {
+  background:
+    linear-gradient(180deg, rgb(5 8 23 / 0.38), rgb(5 8 23 / 0.82)),
+    url("/almaty-mountain-smog-hero.png") center top / cover no-repeat;
+  opacity: 0.2;
+  filter: saturate(0.8) contrast(0.85);
+}
+
+.shop-hero,
+.shop-section,
+.shop-footer-cta {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, 100%);
+  margin-inline: auto;
+}
+
+.shop-hero {
+  padding: clamp(1rem, 2vw, 1.5rem) 0 clamp(3rem, 7vw, 5.5rem);
+}
+
+.shop-lookbook {
+  overflow: hidden;
+  margin-top: clamp(1.2rem, 3vw, 2rem);
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: 1.6rem;
+  background: #050b14;
+  box-shadow: 0 34px 110px rgb(0 0 0 / 0.38);
+}
+
+.shop-lookbook-top {
+  display: grid;
+  grid-template-columns: 0.74fr 2.36fr;
+  min-height: clamp(25rem, 45vw, 38rem);
+  background:
+    radial-gradient(circle at 18% 15%, rgb(96 165 250 / 0.14), transparent 18rem),
+    linear-gradient(120deg, #07111d 0%, #030812 58%, #07101c 100%);
+}
+
+.shop-lookbook-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(1.2rem, 3vw, 2rem);
+}
+
+.shop-lookbook-copy h1 {
+  font-family: Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.7rem);
+  font-weight: 850;
+  letter-spacing: 0;
+  line-height: 0.95;
+}
+
+.shop-lookbook-copy h1 span {
+  color: rgb(147 197 253);
+}
+
+.shop-lookbook-copy p {
+  margin-top: 1.1rem;
+  color: rgb(226 232 240 / 0.82);
+  font-size: clamp(1rem, 1.35vw, 1.3rem);
+  font-weight: 700;
+}
+
+.shop-lookbook-copy small {
+  max-width: 15rem;
+  margin-top: clamp(2rem, 5vw, 4rem);
+  color: rgb(226 232 240 / 0.72);
+  font-size: 0.96rem;
+  line-height: 1.65;
+}
+
+.shop-lookbook-copy img {
+  width: clamp(5.2rem, 8vw, 8rem);
+  margin-top: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 26px rgb(96 165 250 / 0.22));
+}
+
+.shop-lookbook-image-wrap {
+  position: relative;
+  min-width: 0;
+  padding: clamp(1rem, 2.5vw, 1.7rem);
+}
+
+.shop-lookbook-image-wrap > img {
+  width: 100%;
+  height: clamp(24rem, 42vw, 35rem);
+  border-radius: 1.15rem;
+  object-fit: cover;
+  object-position: center;
+  box-shadow: 0 28px 80px rgb(0 0 0 / 0.34);
+}
+
+.shop-logo-correction {
+  position: absolute;
+  right: clamp(1.8rem, 4vw, 3rem);
+  bottom: clamp(1.8rem, 4vw, 3rem);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  border: 1px solid rgb(255 255 255 / 0.15);
+  border-radius: 999px;
+  background: rgb(3 7 18 / 0.72);
+  box-shadow: 0 18px 48px rgb(0 0 0 / 0.34);
+  backdrop-filter: blur(18px);
+  padding: 0.45rem 0.78rem 0.45rem 0.45rem;
+}
+
+.shop-logo-correction img {
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.92);
+  object-fit: contain;
+  padding: 0.18rem;
+}
+
+.shop-logo-correction span {
+  color: rgb(226 232 240 / 0.86);
+  font-size: 0.74rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.shop-poster-shirt {
+  position: relative;
+  min-height: clamp(20rem, 33vw, 31rem);
+  border-radius: 2.4rem 2.4rem 1rem 1rem;
+  box-shadow: inset 0 -34px 76px rgb(0 0 0 / 0.16), 0 28px 80px rgb(0 0 0 / 0.32);
+}
+
+.shop-poster-shirt::before,
+.shop-poster-shirt::after {
+  content: "";
+  position: absolute;
+  top: clamp(2.4rem, 5vw, 4rem);
+  width: 32%;
+  height: 44%;
+  background: inherit;
+  box-shadow: inherit;
+}
+
+.shop-poster-shirt::before {
+  left: -18%;
+  border-radius: 2rem 0.9rem 1.3rem 1.6rem;
+  transform: rotate(20deg);
+}
+
+.shop-poster-shirt::after {
+  right: -18%;
+  border-radius: 0.9rem 2rem 1.6rem 1.3rem;
+  transform: rotate(-20deg);
+}
+
+.shop-poster-neck {
+  position: absolute;
+  top: 0.9rem;
+  left: 50%;
+  z-index: 2;
+  width: 26%;
+  height: 9%;
+  border-radius: 0 0 999px 999px;
+  background: rgb(0 0 0 / 0.18);
+  transform: translateX(-50%);
+}
+
+.shop-poster-navy {
+  background:
+    radial-gradient(circle at 65% 18%, rgb(59 130 246 / 0.1), transparent 6rem),
+    linear-gradient(160deg, #101b2e, #08111f 55%, #050b14);
+}
+
+.shop-poster-white {
+  background:
+    radial-gradient(circle at 75% 55%, rgb(147 197 253 / 0.2), transparent 9rem),
+    linear-gradient(160deg, #ffffff, #f0f4f8 55%, #dbe5ef);
+  color: #111827;
+}
+
+.shop-poster-black {
+  background:
+    radial-gradient(circle at 58% 75%, rgb(148 163 184 / 0.13), transparent 8rem),
+    linear-gradient(160deg, #111111, #050505);
+}
+
+.shop-poster-logo {
+  position: absolute;
+  z-index: 3;
+  top: 18%;
+  right: 14%;
+  display: grid;
+  place-items: center;
+  width: clamp(3.1rem, 5.2vw, 5rem);
+}
+
+.shop-poster-logo img {
+  width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 12px rgb(147 197 253 / 0.16));
+}
+
+.shop-poster-shirt strong {
+  position: absolute;
+  z-index: 3;
+  top: 19%;
+  left: 14%;
+  max-width: 12rem;
+  font-family: Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(1.3rem, 2.4vw, 2.2rem);
+  font-weight: 850;
+  letter-spacing: 0;
+  line-height: 1.05;
+}
+
+.shop-poster-shirt small {
+  position: absolute;
+  z-index: 3;
+  right: 12%;
+  bottom: 11%;
+  max-width: 7rem;
+  color: rgb(147 197 253 / 0.86);
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.shop-contour-print {
+  position: absolute;
+  z-index: 2;
+  inset: 42% 5% 7%;
+  opacity: 0.42;
+  background:
+    repeating-radial-gradient(ellipse at 63% 50%, transparent 0 12px, rgb(147 197 253 / 0.42) 13px 14px, transparent 15px 26px);
+  mask-image: linear-gradient(160deg, transparent, black 26%, black 75%, transparent);
+}
+
+.shop-skyline-print {
+  position: absolute;
+  z-index: 2;
+  left: 6%;
+  right: 6%;
+  bottom: 13%;
+  height: 22%;
+  opacity: 0.55;
+  background:
+    linear-gradient(135deg, transparent 0 12%, rgb(203 213 225 / 0.72) 13% 14%, transparent 15% 27%, rgb(203 213 225 / 0.72) 28% 29%, transparent 30% 43%, rgb(203 213 225 / 0.72) 44% 45%, transparent 46%),
+    linear-gradient(to top, rgb(203 213 225 / 0.6), transparent 3px),
+    linear-gradient(90deg, transparent 86%, rgb(203 213 225 / 0.8) 87% 88%, transparent 89%);
+}
+
+.shop-lookbook-bottom {
+  display: grid;
+  grid-template-columns: 0.58fr 2.42fr;
+  min-height: clamp(20rem, 34vw, 31rem);
+  border-top: 2px solid rgb(255 255 255 / 0.84);
+  background: #f5f6f8;
+}
+
+.shop-concept-panel {
+  display: grid;
+  align-content: start;
+  gap: clamp(1rem, 2vw, 1.55rem);
+  border-right: 2px solid white;
+  background: linear-gradient(180deg, #f8fafc, #e9eef5);
+  color: #111827;
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+}
+
+.shop-concept-panel > p {
+  color: #111827;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.shop-concept-panel > span {
+  display: block;
+  width: 2.5rem;
+  height: 2px;
+  background: #5b7fc7;
+}
+
+.shop-concept-panel div {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.shop-concept-panel svg {
+  color: #5776b1;
+}
+
+.shop-concept-panel strong {
+  max-width: 9rem;
+  color: #111827;
+  font-size: 0.84rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.shop-photo-panel {
+  position: relative;
+  overflow: hidden;
+  border-right: 2px solid white;
+  background:
+    radial-gradient(circle at 18% 10%, rgb(255 255 255 / 0.85), transparent 11rem),
+    linear-gradient(145deg, #f8fafc, #d6dbe2);
+}
+
+.shop-photo-panel:last-child {
+  border-right: 0;
+}
+
+.shop-real-photo-panel {
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 35%, rgb(255 255 255 / 0.16), transparent 20rem),
+    linear-gradient(145deg, #07111f, #111827);
+}
+
+.shop-real-photo-panel > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.shop-photo-brand-mark {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.1rem;
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid rgb(255 255 255 / 0.16);
+  border-radius: 1.1rem;
+  background: rgb(255 255 255 / 0.88);
+  box-shadow: 0 18px 48px rgb(0 0 0 / 0.22);
+}
+
+.shop-photo-brand-mark img {
+  width: 3.15rem;
+  object-fit: contain;
+}
+
+.shop-photo-navy {
+  background:
+    radial-gradient(circle at 34% 20%, rgb(255 255 255 / 0.72), transparent 12rem),
+    linear-gradient(145deg, #f7f3eb, #c9c4bc);
+}
+
+.shop-photo-white {
+  background:
+    radial-gradient(circle at 35% 22%, rgb(255 255 255 / 0.92), transparent 12rem),
+    linear-gradient(145deg, #fbfbfa, #d8d4ce);
+}
+
+.shop-photo-black {
+  background:
+    radial-gradient(circle at 36% 20%, rgb(255 255 255 / 0.58), transparent 12rem),
+    linear-gradient(145deg, #dad7d2, #9ca3af);
+}
+
+.shop-photo-panel .shop-shirt-stage {
+  padding-top: 4rem;
+}
+
+.shop-photo-panel .shop-shirt {
+  width: min(11rem, 43%);
+  height: clamp(14rem, 24vw, 22rem);
+}
+
+.shop-hanger {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 3.4rem;
+  background: rgb(15 23 42 / 0.36);
+}
+
+.shop-hanger::after {
+  content: "";
+  position: absolute;
+  top: 3rem;
+  left: 50%;
+  width: 4.5rem;
+  height: 1.3rem;
+  border-top: 0.45rem solid #111827;
+  border-radius: 50% 50% 0 0;
+  transform: translateX(-50%);
+}
+
+.shop-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.06);
+  color: rgb(226 232 240 / 0.78);
+  padding: 0.58rem 0.86rem;
+  font-size: 0.84rem;
+  font-weight: 750;
+  text-decoration: none;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.shop-back:hover {
+  transform: translateY(-2px);
+  border-color: rgb(125 211 252 / 0.32);
+  background: rgb(255 255 255 / 0.09);
+}
+
+.shop-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(20rem, 0.72fr);
+  gap: clamp(1.6rem, 4vw, 4rem);
+  align-items: center;
+  padding-top: clamp(2rem, 5vw, 4.5rem);
+}
+
+.shop-brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.065);
+  box-shadow: 0 18px 60px rgb(0 0 0 / 0.2);
+  padding: 0.42rem 0.9rem 0.42rem 0.48rem;
+}
+
+.shop-brand-lockup img {
+  width: 2.4rem;
+  height: 2.4rem;
+  object-fit: contain;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.88);
+  padding: 0.18rem;
+}
+
+.shop-brand-lockup span,
+.shop-kicker,
+.shop-section-heading p,
+.shop-product-type {
+  color: rgb(216 180 254 / 0.86);
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.shop-kicker {
+  margin-top: 2rem;
+}
+
+.shop-hero-copy h1 {
+  max-width: 12ch;
+  margin-top: 0.7rem;
+  font-family: Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(3.1rem, 7.5vw, 6.8rem);
+  font-weight: 850;
+  letter-spacing: 0;
+  line-height: 0.9;
+}
+
+.shop-hero-copy > p:last-of-type {
+  max-width: 40rem;
+  margin-top: 1.2rem;
+  color: rgb(226 232 240 / 0.74);
+  font-size: clamp(1rem, 1.4vw, 1.18rem);
+  line-height: 1.85;
+}
+
+.shop-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.7rem;
+}
+
+.shop-hero-actions a,
+.shop-add-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgb(34 211 238), rgb(167 139 250));
+  box-shadow: 0 20px 50px rgb(124 58 237 / 0.24);
+  color: #06111d;
+  cursor: pointer;
+  font-weight: 850;
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+
+.shop-hero-actions a {
+  padding: 0.86rem 1.08rem;
+}
+
+.shop-hero-actions a:nth-child(2) {
+  border: 1px solid rgb(255 255 255 / 0.12);
+  background: rgb(255 255 255 / 0.08);
+  color: white;
+  box-shadow: none;
+}
+
+.shop-hero-actions a:hover,
+.shop-add-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+  box-shadow: 0 24px 64px rgb(124 58 237 / 0.3);
+}
+
+.shop-hero-panel {
+  display: flex;
+  justify-content: center;
+}
+
+.shop-hero-card {
+  position: relative;
+  width: min(25rem, 100%);
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 1.7rem;
+  background:
+    linear-gradient(145deg, rgb(255 255 255 / 0.12), rgb(255 255 255 / 0.04)),
+    rgb(9 17 34 / 0.64);
+  box-shadow: 0 32px 90px rgb(0 0 0 / 0.35);
+  backdrop-filter: blur(24px);
+  padding: 1rem;
+}
+
+.shop-hero-badge,
+.shop-eco-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  border: 1px solid rgb(134 239 172 / 0.2);
+  border-radius: 999px;
+  background: rgb(20 184 166 / 0.12);
+  color: rgb(187 247 208);
+  font-size: 0.7rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.shop-hero-badge {
+  padding: 0.46rem 0.7rem;
+}
+
+.shop-hero-shirt {
+  display: grid;
+  place-items: center;
+  min-height: 25rem;
+  margin-top: 1rem;
+  border-radius: 1.2rem;
+  background:
+    radial-gradient(circle at 50% 20%, rgb(216 180 254 / 0.24), transparent 14rem),
+    linear-gradient(180deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0.025));
+}
+
+.shop-hero-shirt > div {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 14rem;
+  height: 17rem;
+  border-radius: 2rem 2rem 1.2rem 1.2rem;
+  background: linear-gradient(155deg, #eef7f4, #d9e2f0 45%, #b8c4d3);
+  box-shadow: inset 0 -28px 60px rgb(15 23 42 / 0.1), 0 28px 68px rgb(0 0 0 / 0.25);
+}
+
+.shop-hero-shirt > div::before,
+.shop-hero-shirt > div::after,
+.shop-shirt::before,
+.shop-shirt::after {
+  content: "";
+  position: absolute;
+  top: 2.4rem;
+  width: 4.8rem;
+  height: 7.5rem;
+  background: inherit;
+  border-radius: 1.6rem 1.6rem 0.8rem 0.8rem;
+}
+
+.shop-hero-shirt > div::before,
+.shop-shirt::before {
+  left: -3.1rem;
+  transform: rotate(17deg);
+}
+
+.shop-hero-shirt > div::after,
+.shop-shirt::after {
+  right: -3.1rem;
+  transform: rotate(-17deg);
+}
+
+.shop-hero-shirt img {
+  position: relative;
+  z-index: 1;
+  width: 6.2rem;
+  object-fit: contain;
+}
+
+.shop-hero-shirt svg {
+  position: absolute;
+  z-index: 1;
+  bottom: 3rem;
+  color: rgb(14 116 144 / 0.58);
+}
+
+.shop-hero-stats {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.shop-hero-stats span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgb(255 255 255 / 0.08);
+  border-radius: 0.85rem;
+  background: rgb(255 255 255 / 0.055);
+  color: rgb(226 232 240 / 0.72);
+  padding: 0.72rem 0.8rem;
+  font-size: 0.83rem;
+  font-weight: 750;
+}
+
+.shop-section {
+  padding: clamp(2.5rem, 6vw, 5rem) 0;
+}
+
+.shop-section-heading {
+  max-width: 44rem;
+  margin-bottom: clamp(1.3rem, 3vw, 2rem);
+}
+
+.shop-mask-feature {
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 1.4rem;
+  background: rgb(255 255 255 / 0.06);
+  box-shadow: 0 24px 70px rgb(0 0 0 / 0.26);
+  margin-bottom: 1rem;
+}
+
+.shop-mask-feature img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  object-fit: cover;
+  object-position: center;
+}
+
+.shop-section-heading h2,
+.shop-footer-cta h2 {
+  margin-top: 0.45rem;
+  font-family: Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(2rem, 4vw, 3.7rem);
+  font-weight: 850;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.shop-product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.shop-product-grid-three {
+  grid-template-columns: repeat(auto-fit, minmax(16.5rem, 1fr));
+}
+
+.shop-product-card {
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 1.25rem;
+  background:
+    linear-gradient(150deg, rgb(255 255 255 / 0.105), rgb(255 255 255 / 0.035)),
+    rgb(9 17 34 / 0.62);
+  box-shadow: 0 22px 62px rgb(0 0 0 / 0.28);
+  backdrop-filter: blur(22px);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.shop-product-card:hover {
+  transform: translateY(-5px);
+  border-color: rgb(216 180 254 / 0.28);
+  box-shadow: 0 28px 76px rgb(76 29 149 / 0.3);
+}
+
+.shop-product-media {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 21rem;
+  overflow: hidden;
+  border: 0;
+  background:
+    radial-gradient(circle at 50% 24%, rgb(255 255 255 / 0.95), transparent 12rem),
+    linear-gradient(180deg, #f8fafc, #eef2f7);
+  cursor: zoom-in;
+  text-align: left;
+}
+
+.shop-product-media::after {
+  content: "";
+  position: absolute;
+  inset: auto 12% 1.1rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.4), transparent);
+}
+
+.shop-eco-badge {
+  position: absolute;
+  z-index: 3;
+  top: 0.85rem;
+  left: 0.85rem;
+  padding: 0.42rem 0.58rem;
+}
+
+.shop-preview-hint {
+  position: absolute;
+  right: 0.85rem;
+  bottom: 0.85rem;
+  z-index: 4;
+  border: 1px solid rgb(15 23 42 / 0.08);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.82);
+  box-shadow: 0 14px 34px rgb(15 23 42 / 0.14);
+  color: #111827;
+  padding: 0.42rem 0.62rem;
+  font-size: 0.68rem;
+  font-weight: 850;
+  opacity: 0;
+  transform: translateY(0.4rem);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.shop-product-media:hover .shop-preview-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.shop-product-body {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.shop-product-type {
+  color: rgb(125 211 252 / 0.78);
+  font-size: 0.65rem;
+}
+
+.shop-product-body h3 {
+  margin-top: 0.32rem;
+  color: white;
+  font-family: Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 850;
+  line-height: 1.15;
+}
+
+.shop-product-body p {
+  margin-top: 0.5rem;
+  color: rgb(226 232 240 / 0.66);
+  font-size: 0.84rem;
+  line-height: 1.62;
+}
+
+.shop-product-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.shop-product-meta strong {
+  color: white;
+  font-family: Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 850;
+}
+
+.shop-color-row {
+  display: flex;
+  align-items: center;
+  gap: 0.38rem;
+}
+
+.shop-color-row span {
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid rgb(255 255 255 / 0.38);
+  border-radius: 999px;
+  box-shadow: 0 0 0 3px rgb(255 255 255 / 0.045);
+}
+
+.shop-add-button {
+  width: 100%;
+  padding: 0.78rem 1rem;
+}
+
+.shop-device-stage,
+.shop-shirt-stage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.shop-real-product-visual {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%);
+}
+
+.shop-real-product-visual img {
+  width: min(112%, 27rem);
+  height: 96%;
+  object-fit: contain;
+  filter: drop-shadow(0 24px 42px rgb(0 0 0 / 0.26));
+  transform: scale(1.02);
+}
+
+.shop-mask-product-visual {
+  background: linear-gradient(180deg, #ffffff 0%, #f5f7fb 100%);
+}
+
+.shop-mask-product-visual img {
+  width: min(112%, 27rem);
+  max-width: none;
+  height: 96%;
+  object-fit: contain;
+  filter: drop-shadow(0 24px 48px rgb(0 0 0 / 0.22));
+  transform: scale(1.02);
+}
+
+.shop-preview-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  background: rgb(2 6 23 / 0.78);
+  backdrop-filter: blur(18px);
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.shop-preview-modal {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(17rem, 0.75fr);
+  gap: clamp(1rem, 3vw, 2rem);
+  width: min(68rem, 100%);
+  max-height: min(45rem, 92vh);
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(circle at 30% 0%, rgb(167 139 250 / 0.2), transparent 24rem),
+    linear-gradient(145deg, rgb(15 23 42 / 0.96), rgb(3 7 18 / 0.98));
+  box-shadow: 0 40px 120px rgb(0 0 0 / 0.46);
+  padding: clamp(1rem, 2vw, 1.4rem);
+}
+
+.shop-preview-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.08);
+  color: white;
+  cursor: pointer;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.shop-preview-close:hover {
+  transform: rotate(8deg) scale(1.04);
+  background: rgb(255 255 255 / 0.14);
+}
+
+.shop-preview-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: min(34rem, 70vh);
+  overflow: hidden;
+  border-radius: 1.1rem;
+  background:
+    radial-gradient(circle at 50% 38%, rgb(255 255 255 / 0.94), transparent 16rem),
+    linear-gradient(135deg, #ffffff, #f2f5f9);
+  perspective: 950px;
+}
+
+.shop-preview-stage > img {
+  width: min(100%, 42rem);
+  height: min(32rem, 68vh);
+  object-fit: contain;
+  filter: drop-shadow(0 34px 64px rgb(0 0 0 / 0.28));
+}
+
+.shop-preview-stage .shop-device-stage,
+.shop-preview-stage .shop-shirt-stage {
+  position: relative;
+  min-height: 28rem;
+  width: 100%;
+}
+
+.shop-preview-info {
+  align-self: center;
+  padding: clamp(0.5rem, 2vw, 1rem);
+}
+
+.shop-preview-info span {
+  color: rgb(125 211 252 / 0.84);
+  font-size: 0.74rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.shop-preview-info h2 {
+  margin-top: 0.65rem;
+  color: white;
+  font-family: Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 850;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.shop-preview-info p {
+  margin-top: 1rem;
+  color: rgb(226 232 240 / 0.7);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.shop-preview-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.4rem;
+}
+
+.shop-preview-meta strong {
+  color: white;
+  font-family: Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 2rem;
+  font-weight: 850;
+}
+
+.shop-color-row i {
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid rgb(255 255 255 / 0.38);
+  border-radius: 999px;
+  box-shadow: 0 0 0 3px rgb(255 255 255 / 0.045);
+}
+
+.shop-device-orbit {
+  position: absolute;
+  width: 11rem;
+  height: 11rem;
+  border: 1px solid rgb(125 211 252 / 0.18);
+  border-radius: 999px;
+  animation: shopOrbit 8s linear infinite;
+}
+
+.shop-device-orbit::after {
+  content: "";
+  position: absolute;
+  top: 1.5rem;
+  right: 0.6rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 999px;
+  background: rgb(125 211 252);
+  box-shadow: 0 0 20px rgb(125 211 252 / 0.7);
+}
+
+.shop-device-shell {
+  position: relative;
+  width: 11.7rem;
+  border: 1px solid rgb(255 255 255 / 0.16);
+  border-radius: 1.5rem;
+  background: linear-gradient(160deg, rgb(241 245 249 / 0.96), rgb(148 163 184 / 0.82));
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.5), 0 24px 54px rgb(0 0 0 / 0.3);
+  padding: 0.85rem;
+}
+
+.shop-device-top,
+.shop-device-screen,
+.shop-device-bars {
+  position: relative;
+  z-index: 1;
+}
+
+.shop-device-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #0e7490;
+}
+
+.shop-device-top img {
+  width: 2.6rem;
+  object-fit: contain;
+}
+
+.shop-device-screen {
+  margin-top: 0.75rem;
+  border-radius: 1rem;
+  background: linear-gradient(145deg, #07111f, #0f2736);
+  padding: 1rem;
+}
+
+.shop-device-screen span,
+.shop-device-screen small {
+  display: block;
+  color: rgb(226 232 240 / 0.62);
+  font-size: 0.7rem;
+  font-weight: 750;
+}
+
+.shop-device-screen strong {
+  display: block;
+  margin: 0.2rem 0;
+  color: rgb(134 239 172);
+  font-family: Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 2.6rem;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.shop-device-bars {
+  display: grid;
+  gap: 0.38rem;
+  margin-top: 0.75rem;
+}
+
+.shop-device-bars i {
+  height: 0.42rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #14b8a6, #a78bfa);
+}
+
+.shop-device-bars i:nth-child(2) {
+  width: 78%;
+}
+
+.shop-device-bars i:nth-child(3) {
+  width: 54%;
+}
+
+.shop-shirt-stage {
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+  padding: 4.2rem 1rem 1.3rem;
+}
+
+.shop-shirt {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(7.7rem, 38vw);
+  height: 10.6rem;
+  border-radius: 1.4rem 1.4rem 0.9rem 0.9rem;
+  background: linear-gradient(160deg, #eef4f3, #cbd5e1);
+  box-shadow: inset 0 -18px 42px rgb(15 23 42 / 0.09), 0 22px 44px rgb(0 0 0 / 0.24);
+}
+
+.shop-shirt-front img {
+  position: relative;
+  z-index: 2;
+  width: 3.1rem;
+  object-fit: contain;
+}
+
+.shop-shirt-back strong {
+  position: relative;
+  z-index: 2;
+  max-width: 6.3rem;
+  color: #0f172a;
+  font-family: Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 850;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.shop-shirt-neck {
+  position: absolute;
+  z-index: 2;
+  top: 0.55rem;
+  left: 50%;
+  width: 2.3rem;
+  height: 1.15rem;
+  border-radius: 0 0 999px 999px;
+  background: rgb(5 8 23 / 0.16);
+  transform: translateX(-50%);
+}
+
+.shop-shirt-smog .shop-shirt {
+  background:
+    radial-gradient(circle at 28% 30%, rgb(148 163 184 / 0.35), transparent 2.6rem),
+    linear-gradient(160deg, #eef2f7, #b9c3d1);
+}
+
+.shop-shirt-mountain .shop-shirt {
+  background: linear-gradient(160deg, #e0f7ff, #a7c6d8);
+}
+
+.shop-shirt-urban .shop-shirt {
+  background: linear-gradient(160deg, #111827, #334155);
+}
+
+.shop-shirt-urban .shop-shirt-back strong {
+  color: white;
+}
+
+.shop-shirt-eco .shop-shirt {
+  background:
+    linear-gradient(45deg, rgb(255 255 255 / 0.12) 25%, transparent 25% 50%, rgb(255 255 255 / 0.1) 50% 75%, transparent 75%),
+    linear-gradient(160deg, #d8cbb3, #ece8d7);
+  background-size: 12px 12px, auto;
+}
+
+.shop-mountain-line {
+  position: absolute;
+  z-index: 1;
+  bottom: 2.6rem;
+  width: 6.4rem;
+  fill: none;
+  stroke: rgb(14 116 144 / 0.58);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 5;
+}
+
+.shop-aqi-map {
+  position: absolute;
+  z-index: 1;
+  inset: 3.4rem 1.2rem 2.2rem;
+  border: 1px solid rgb(34 211 238 / 0.36);
+  border-radius: 0.8rem;
+  background:
+    linear-gradient(90deg, transparent 48%, rgb(34 211 238 / 0.22) 49% 51%, transparent 52%),
+    linear-gradient(0deg, transparent 48%, rgb(34 211 238 / 0.22) 49% 51%, transparent 52%),
+    radial-gradient(circle at 70% 38%, rgb(134 239 172 / 0.85) 0.22rem, transparent 0.25rem),
+    radial-gradient(circle at 36% 66%, rgb(250 204 21 / 0.86) 0.22rem, transparent 0.25rem);
+}
+
+.shop-footer-cta {
+  display: grid;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 1.6rem;
+  background:
+    radial-gradient(circle at 50% 0%, rgb(168 85 247 / 0.2), transparent 28rem),
+    rgb(255 255 255 / 0.06);
+  margin-bottom: 2rem;
+  padding: clamp(2rem, 6vw, 4.5rem);
+  text-align: center;
+}
+
+.shop-footer-cta svg {
+  color: rgb(125 211 252);
+}
+
+.shop-footer-cta p {
+  max-width: 34rem;
+  margin-top: 0.9rem;
+  color: rgb(226 232 240 / 0.68);
+  line-height: 1.7;
+}
+
+@keyframes shopOrbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mission-feature-list {
+  grid-area: features;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  border: 1px solid rgb(255 255 255 / 0.08);
+  border-radius: 1rem;
+  background: rgb(5 18 35 / 0.28);
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+}
+
+.mission-feature-list article {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.85rem;
+  border-right: 1px solid rgb(255 255 255 / 0.08);
+  padding: 1rem;
+}
+
+.mission-feature-list article:last-child {
+  border-right: 0;
+}
+
+.mission-feature-list article > div {
+  display: grid;
+  height: 2.55rem;
+  width: 2.55rem;
+  place-items: center;
+  border: 1px solid rgb(147 197 253 / 0.22);
+  border-radius: 999px;
+  background: rgb(96 165 250 / 0.1);
+  color: rgb(147 197 253);
+}
+
+.mission-feature-list h3 {
+  margin: 0;
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.mission-feature-list p {
+  margin: 0.28rem 0 0;
+  color: rgb(226 232 240 / 0.62);
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+
+.airq-mission-section {
+  padding: clamp(4rem, 8vw, 7rem) 0;
+}
+
+.airq-mission-statement {
+  border-top: 1px solid rgb(255 255 255 / 0.1);
+}
+
+.airq-mission-section h2,
+.airq-mission-cta h2 {
+  max-width: 54rem;
+  font-size: clamp(2.2rem, 5vw, 4.8rem);
+}
+
+.airq-mission-values {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.airq-mission-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 1.25rem;
+  background:
+    linear-gradient(145deg, rgb(255 255 255 / 0.13), rgb(255 255 255 / 0.045));
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  box-shadow: 0 24px 70px rgb(0 0 0 / 0.24);
+  backdrop-filter: blur(22px);
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.airq-mission-card:hover {
+  transform: translateY(-8px);
+  border-color: rgb(125 211 252 / 0.38);
+  box-shadow:
+    0 30px 90px rgb(0 0 0 / 0.3),
+    0 0 38px rgb(34 211 238 / 0.15);
+}
+
+.airq-mission-icon {
+  display: grid;
+  height: 3.2rem;
+  width: 3.2rem;
+  place-items: center;
+  border-radius: 1rem;
+  background: rgb(34 211 238 / 0.14);
+  color: rgb(125 211 252);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.12);
+}
+
+.airq-mission-card h3 {
+  margin: 1.25rem 0 0.65rem;
+  font-family: Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.airq-mission-card p {
+  margin: 0;
+  font-size: 0.98rem;
+}
+
+.airq-mission-tech {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(18rem, 0.65fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+}
+
+.airq-mission-signal {
+  position: relative;
+  min-height: 23rem;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 1.5rem;
+  background:
+    linear-gradient(145deg, rgb(8 20 35 / 0.72), rgb(12 39 58 / 0.55));
+  box-shadow:
+    0 28px 80px rgb(0 0 0 / 0.28),
+    inset 0 1px 0 rgb(255 255 255 / 0.14);
+  backdrop-filter: blur(24px);
+}
+
+.airq-mission-signal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(circle at 50% 50%, #000, transparent 74%);
+}
+
+.signal-bars {
+  position: absolute;
+  inset: auto 10% 24% 10%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.7rem;
+  align-items: end;
+  height: 12rem;
+}
+
+.signal-bars span {
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(180deg, rgb(74 222 128), rgb(34 211 238 / 0.22));
+  box-shadow: 0 0 24px rgb(34 211 238 / 0.22);
+  animation: signalRise 2.8s ease-in-out infinite;
+}
+
+.signal-bars span:nth-child(1) { height: 44%; animation-delay: 0s; }
+.signal-bars span:nth-child(2) { height: 72%; animation-delay: 0.18s; }
+.signal-bars span:nth-child(3) { height: 54%; animation-delay: 0.36s; }
+.signal-bars span:nth-child(4) { height: 86%; animation-delay: 0.54s; }
+.signal-bars span:nth-child(5) { height: 62%; animation-delay: 0.72s; }
+
+.signal-status {
+  position: absolute;
+  left: 1.25rem;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.09);
+  padding: 0.9rem 1rem;
+  color: rgb(226 232 240 / 0.9);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.airq-mission-cta {
+  display: grid;
+  justify-items: center;
+  gap: 1.4rem;
+  padding: clamp(4rem, 8vw, 7rem) 0 clamp(5rem, 9vw, 8rem);
+  text-align: center;
+}
+
+.airq-mission-cta h2 {
+  margin-inline: auto;
+}
+
+@keyframes signalRise {
+  0%, 100% { transform: scaleY(0.82); opacity: 0.72; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes missionGridDrift {
+  from { transform: translate3d(-1.2%, -0.6%, 0); opacity: 0.72; }
+  to { transform: translate3d(1.4%, 0.8%, 0); opacity: 1; }
+}
+
+.airq-auth-button {
+  justify-self: end;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.94);
+  color: #08111f;
+  box-shadow: 0 16px 46px rgb(0 0 0 / 0.22);
+}
+
+.airq-auth-button:hover {
+  background: white;
+}
+
+.airq-auth-dialog {
+  border-color: rgb(255 255 255 / 0.14);
+  background:
+    linear-gradient(145deg, rgb(15 23 42 / 0.98), rgb(8 21 38 / 0.98));
+  box-shadow: 0 34px 90px rgb(0 0 0 / 0.42);
+}
+
+.airq-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100svh;
+  overflow: hidden;
+  padding: 7.5rem 1.25rem 5rem;
+}
+
+.airq-scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: #07121f;
+}
+
+.airq-scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(128deg, rgb(8 47 73 / 0.62) 0%, transparent 34%),
+    linear-gradient(238deg, rgb(20 184 166 / 0.32) 0%, transparent 42%),
+    radial-gradient(ellipse at 68% 18%, rgb(56 189 248 / 0.24), transparent 30rem),
+    radial-gradient(ellipse at 24% 78%, rgb(74 222 128 / 0.16), transparent 28rem),
+    radial-gradient(ellipse at 82% 76%, rgb(245 158 61 / 0.12), transparent 24rem),
+    radial-gradient(ellipse at 18% 58%, rgb(226 232 240 / 0.16), transparent 32rem),
+    radial-gradient(ellipse at 58% 48%, rgb(125 211 252 / 0.12), transparent 34rem),
+    radial-gradient(ellipse at 82% 62%, rgb(203 213 225 / 0.13), transparent 28rem),
+    linear-gradient(180deg, rgb(2 8 23 / 0.16), rgb(2 8 23 / 0.26) 52%, rgb(2 8 23 / 0.52));
+  filter: blur(0.4px);
+  animation: airqGradientBreath 12s ease-in-out infinite alternate;
+}
+
+.airq-scene-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(180deg, rgb(4 12 24 / 0.12), rgb(4 12 24 / 0.16) 48%, rgb(4 12 24 / 0.48)),
+    linear-gradient(90deg, rgb(5 15 28 / 0.38), rgb(5 15 28 / 0.14) 48%, rgb(5 15 28 / 0.28)),
+    url("/almaty-mountain-smog-hero.png");
+  background-position: center;
+  background-size: cover;
+  filter: saturate(0.98) contrast(0.98) brightness(0.86);
+  transform: scale(1.04);
+  animation: airqSceneDrift 18s ease-in-out infinite alternate;
+}
+
+.airq-scene-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 58%, transparent 0 32%, rgb(4 12 24 / 0.18) 78%),
+    linear-gradient(180deg, rgb(4 12 24 / 0.04), rgb(4 12 24 / 0.24) 72%, rgb(4 12 24 / 0.48));
+}
+
+.airq-sky {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(ellipse at 50% 12%, rgb(186 230 253 / 0.06), transparent 30rem),
+    linear-gradient(180deg, rgb(96 165 250 / 0.035), transparent 48%);
+  animation: airqCleanSky 7s ease-in-out both;
+}
+
+.airq-city-lights {
+  display: none;
+}
+
+.airq-smog {
+  position: absolute;
+  left: -22%;
+  right: -22%;
+  z-index: 3;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  animation-fill-mode: both;
+}
+
+.airq-smog-back {
+  top: 37%;
+  height: 28%;
+  background:
+    radial-gradient(ellipse at 18% 62%, rgb(226 232 240 / 0.42), transparent 30%),
+    radial-gradient(ellipse at 46% 54%, rgb(203 213 225 / 0.4), transparent 36%),
+    radial-gradient(ellipse at 74% 58%, rgb(148 163 184 / 0.34), transparent 34%);
+  filter: blur(24px);
+  animation: airqSmogPass 8.8s ease-in-out both, airqSmogBackDrift 16s ease-in-out infinite alternate;
+}
+
+.airq-smog-front {
+  bottom: 18%;
+  height: 24%;
+  background:
+    radial-gradient(ellipse at 16% 70%, rgb(255 255 255 / 0.42), transparent 28%),
+    radial-gradient(ellipse at 42% 58%, rgb(226 232 240 / 0.46), transparent 36%),
+    radial-gradient(ellipse at 70% 68%, rgb(148 163 184 / 0.34), transparent 32%),
+    radial-gradient(ellipse at 94% 62%, rgb(203 213 225 / 0.32), transparent 26%);
+  filter: blur(17px);
+  animation: airqSmogPass 9.2s ease-in-out both, airqSmogFrontDrift 13s ease-in-out infinite alternate;
+}
+
+.airq-haze-clear {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background:
+    radial-gradient(ellipse at 26% 52%, rgb(255 255 255 / 0.13), transparent 26rem),
+    radial-gradient(ellipse at 70% 58%, rgb(186 230 253 / 0.12), transparent 30rem),
+    linear-gradient(180deg, transparent 0 42%, rgb(226 232 240 / 0.06) 64%, rgb(4 12 24 / 0.22));
+  filter: blur(10px);
+  animation: airqHazeClear 8.2s ease-in-out both;
+}
+
+.airq-center-logo-wrap {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: clamp(7rem, 13vw, 11.25rem);
+  aspect-ratio: 1.28;
+  place-items: center;
+  margin-top: 0;
+  margin-bottom: clamp(1.15rem, 2.4vw, 1.9rem);
+  transform-origin: center;
+  animation: none;
+}
+
+.airq-logo-aura,
+.airq-center-logo-wrap::before,
+.airq-center-logo-wrap::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.airq-logo-aura {
+  inset: -34%;
+  z-index: -2;
+  border-radius: 999px;
+  background:
+    radial-gradient(ellipse at 50% 46%, rgb(125 211 252 / 0.46), transparent 45%),
+    radial-gradient(ellipse at 42% 56%, rgb(186 230 253 / 0.34), transparent 36%),
+    radial-gradient(ellipse at 60% 48%, rgb(56 189 248 / 0.24), transparent 42%);
+  filter: blur(20px);
+  animation: airqAuraPulse 3.8s ease-in-out infinite;
+}
+
+.airq-center-logo-wrap::before {
+  inset: -12%;
+  z-index: -1;
+  border-radius: 999px;
+  background:
+    conic-gradient(from 90deg, transparent 0 16%, rgb(125 211 252 / 0.32) 24%, transparent 34%, rgb(255 255 255 / 0.24) 52%, transparent 66%, rgb(56 189 248 / 0.28) 78%, transparent 100%);
+  filter: blur(11px);
+  animation: airqOrnamentSpin 12s linear infinite;
+}
+
+.airq-center-logo-wrap::after {
+  inset: 4% 2% 8%;
+  z-index: 3;
+  border-radius: 48%;
+  background: linear-gradient(115deg, transparent 0 34%, rgb(255 255 255 / 0.34) 43%, transparent 54% 100%);
+  filter: blur(5px);
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: airqLogoShimmer 4.8s ease-in-out 2.5s infinite;
+}
+
+.airq-center-logo {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter:
+    hue-rotate(5deg)
+    saturate(1.35)
+    brightness(1.28)
+    drop-shadow(0 0 7px rgb(224 242 254 / 0.9))
+    drop-shadow(0 0 22px rgb(125 211 252 / 0.7))
+    drop-shadow(0 0 46px rgb(14 165 233 / 0.32));
+}
+
+.airq-hero-copy {
+  position: relative;
+  z-index: 3;
+  width: min(38rem, calc(100% - 2rem));
+  transform: none;
+  text-align: center;
+}
+
+.airq-hero-copy h1 {
+  margin: 0;
+  font-family: Inter, Manrope, ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(1.55rem, 3.15vw, 2.8rem);
+  font-weight: 650;
+  letter-spacing: 0;
+  line-height: 1.08;
+  text-shadow: 0 14px 42px rgb(0 0 0 / 0.5);
+}
+
+.airq-hero-copy p {
+  margin: 0.75rem auto 0;
+  max-width: 28rem;
+  color: rgb(226 232 240 / 0.82);
+  font-size: clamp(0.92rem, 1.2vw, 1.05rem);
+  line-height: 1.55;
+}
+
+.airq-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1.35rem;
+}
+
+.airq-hero-actions .h-12 {
+  height: 2.75rem;
+  border-radius: 999px;
+  padding-left: 1.15rem;
+  padding-right: 1.15rem;
+  font-size: 0.92rem;
+}
+
+.airq-section-wrap {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 1px;
+  background: rgb(255 255 255 / 0.08);
+}
+
+.airq-info-section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(18rem, 0.58fr);
+  gap: clamp(1.5rem, 5vw, 5rem);
+  align-items: center;
+  min-height: 24rem;
+  padding: clamp(4rem, 8vw, 7rem) clamp(1.25rem, 8vw, 8rem);
+  background:
+    linear-gradient(135deg, rgb(8 20 35), rgb(10 31 48));
+}
+
+.airq-section-kicker {
+  margin: 0 0 1rem;
+  color: rgb(125 211 252 / 0.86);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.airq-info-section h2 {
+  margin: 0;
+  max-width: 48rem;
+  font-family: Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.airq-info-section > p {
+  margin: 0;
+  color: rgb(226 232 240 / 0.78);
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  line-height: 1.8;
+}
+
+.airq-trust-pill {
+  position: fixed;
+  right: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 999px;
+  background: rgb(7 20 34 / 0.48);
+  padding: 0.7rem 0.95rem;
+  color: rgb(255 255 255 / 0.8);
+  font-size: 0.84rem;
+  font-weight: 600;
+  box-shadow: 0 20px 60px rgb(0 0 0 / 0.26);
+  backdrop-filter: blur(18px);
+}
+
+@keyframes airqSceneDrift {
+  from { transform: scale(1.04) translate3d(-0.7%, 0, 0); }
+  to { transform: scale(1.08) translate3d(0.8%, -0.4%, 0); }
+}
+
+@keyframes airqGradientBreath {
+  from { opacity: 0.78; transform: translate3d(-0.6%, 0, 0) scale(1); }
+  to { opacity: 0.96; transform: translate3d(0.8%, -0.4%, 0) scale(1.02); }
+}
+
+@keyframes airqCleanSky {
+  0%, 36% { opacity: 0.92; }
+  62% { opacity: 0.48; }
+  100% { opacity: 0.74; }
+}
+
+@keyframes airqSmogPass {
+  0% { opacity: 0; transform: translate3d(-9%, 5%, 0) scale(0.92); }
+  24% { opacity: 0; transform: translate3d(-7%, 4%, 0) scale(0.96); }
+  48% { opacity: 0.68; transform: translate3d(-1%, 0, 0) scale(1.06); }
+  70% { opacity: 0.44; transform: translate3d(4%, -2%, 0) scale(1.12); }
+  100% { opacity: 0; transform: translate3d(11%, -5%, 0) scale(1.22); }
+}
+
+@keyframes airqSmogBackDrift {
+  from { margin-left: -2rem; }
+  to { margin-left: 2.6rem; }
+}
+
+@keyframes airqSmogFrontDrift {
+  from { margin-left: 2rem; }
+  to { margin-left: -2.8rem; }
+}
+
+@keyframes airqHazeClear {
+  0%, 58% { opacity: 0.1; }
+  100% { opacity: 0.18; }
+}
+
+@keyframes airqAuraPulse {
+  0%, 100% { opacity: 0.58; transform: scale(0.94); }
+  48% { opacity: 0.92; transform: scale(1.08); }
+}
+
+@keyframes airqOrnamentSpin {
+  from { transform: rotate(0deg) scale(0.98); }
+  to { transform: rotate(360deg) scale(0.98); }
+}
+
+@keyframes airqLogoShimmer {
+  0%, 52%, 100% { opacity: 0; transform: translateX(-42%) rotate(-7deg); }
+  62% { opacity: 0.72; }
+  76% { opacity: 0; transform: translateX(42%) rotate(-7deg); }
+}
+
+@keyframes airqLogoFloat {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-7px) rotate(1deg); }
+}
+
+@media (max-width: 900px) {
+  .airq-header {
+    grid-template-columns: 1fr auto;
+  }
+
+  .airq-nav {
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 60;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 0.45rem;
+  }
+
+  .airq-nav a {
+    flex: 0 0 auto;
+    padding: 0 0.75rem;
+    font-size: 0.84rem;
+  }
+
+  .airq-search {
+    flex: 0 0 auto;
+  }
+
+  .airq-auth-button {
+    grid-column: 2;
+  }
+
+  .airq-center-logo-wrap {
+    width: clamp(6.8rem, 24vw, 9.8rem);
+    margin-bottom: 1.2rem;
+  }
+
+  .airq-hero-copy {
+    width: min(34rem, calc(100% - 2rem));
+  }
+
+  .airq-info-section {
+    grid-template-columns: 1fr;
+    min-height: 22rem;
+  }
+
+  .airq-mission-hero {
+    min-height: auto;
+    padding-top: 6.25rem;
+  }
+
+  .mission-reference-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "copy"
+      "impact"
+      "drivers"
+      "features";
+  }
+
+  .mission-impact-panel {
+    margin-top: 0;
+  }
+
+  .airq-mission-hero h1 {
+    max-width: 36rem;
+    font-size: clamp(2.15rem, 9vw, 3.85rem);
+  }
+
+  .mission-driver-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mission-driver-grid article {
+    border-right: 0;
+    border-bottom: 1px solid rgb(255 255 255 / 0.08);
+    padding: 0 0 0.95rem;
+  }
+
+  .mission-driver-grid article:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .mission-feature-list {
+    grid-template-columns: 1fr;
+  }
+
+  .mission-feature-list article {
+    border-right: 0;
+    border-bottom: 1px solid rgb(255 255 255 / 0.08);
+  }
+
+  .mission-feature-list article:last-child {
+    border-bottom: 0;
+  }
+
+  .airq-mission-values,
+  .airq-mission-tech {
+    grid-template-columns: 1fr;
+  }
+
+  .airq-trust-pill {
+    display: none;
+  }
+
+  .airq-shop-page {
+    padding-bottom: 6rem;
+  }
+
+  .shop-hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shop-lookbook-top,
+  .shop-lookbook-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .shop-lookbook-copy {
+    min-height: 22rem;
+  }
+
+  .shop-lookbook-shirts {
+    grid-template-columns: 1fr;
+    padding-inline: clamp(2.5rem, 13vw, 7rem);
+  }
+
+  .shop-poster-shirt {
+    min-height: 27rem;
+  }
+
+  .shop-concept-panel,
+  .shop-photo-panel {
+    border-right: 0;
+    border-bottom: 2px solid white;
+  }
+
+  .shop-photo-panel {
+    min-height: 28rem;
+  }
+
+  .shop-hero-copy h1 {
+    max-width: 11ch;
+  }
+
+  .shop-hero-panel {
+    justify-content: flex-start;
+  }
+
+  .shop-product-grid,
+  .shop-product-grid-three {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .airq-header {
+    padding: 1rem;
+  }
+
+  .airq-hero {
+    padding: 6.5rem 1rem 5.5rem;
+  }
+
+  .airq-center-logo-wrap {
+    width: clamp(6rem, 34vw, 8.2rem);
+    margin-bottom: 1rem;
+  }
+
+  .airq-hero-copy {
+    width: min(27rem, calc(100% - 1.5rem));
+  }
+
+  .airq-hero-actions .h-12 {
+    width: 100%;
+  }
+
+  .airq-mission-hero,
+  .airq-mission-section,
+  .airq-mission-cta {
+    width: min(100% - 1.25rem, 1180px);
+  }
+
+  .airq-mission-back {
+    top: 1rem;
+  }
+
+  .airq-mission-hero h1 {
+    font-size: clamp(2rem, 11vw, 3.05rem);
+    line-height: 1.04;
+  }
+
+  .airq-mission-hero-copy > p:last-of-type,
+  .airq-mission-section p {
+    font-size: 0.98rem;
+    line-height: 1.7;
+  }
+
+  .airq-mission-actions .h-12 {
+    width: 100%;
+  }
+
+  .airq-mission-visual {
+    border-radius: 1.25rem;
+  }
+
+  .mission-impact-chart {
+    grid-template-columns: 1fr;
+  }
+
+  .mission-sensor-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mission-sensor-row div:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .airq-shop-page {
+    padding: 0.9rem 0.9rem 6rem;
+  }
+
+  .shop-hero {
+    padding-top: 0.4rem;
+  }
+
+  .shop-back {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .shop-hero-grid {
+    padding-top: 1.6rem;
+  }
+
+  .shop-lookbook {
+    border-radius: 1rem;
+  }
+
+  .shop-lookbook-copy {
+    min-height: 19rem;
+    padding: 1.1rem;
+  }
+
+  .shop-lookbook-copy h1 {
+    font-size: clamp(2.4rem, 14vw, 3.9rem);
+  }
+
+  .shop-lookbook-copy small {
+    margin-top: 1.8rem;
+  }
+
+  .shop-lookbook-copy img {
+    width: 5.5rem;
+    margin-top: 1.6rem;
+  }
+
+  .shop-lookbook-shirts {
+    gap: 1.2rem;
+    padding: 1.2rem 3.2rem 2rem;
+  }
+
+  .shop-poster-shirt {
+    min-height: 20rem;
+  }
+
+  .shop-poster-shirt strong {
+    max-width: 9rem;
+    font-size: 1.35rem;
+  }
+
+  .shop-lookbook-bottom {
+    min-height: auto;
+  }
+
+  .shop-concept-panel {
+    padding: 1.2rem;
+  }
+
+  .shop-photo-panel {
+    min-height: 24rem;
+  }
+
+  .shop-photo-panel .shop-shirt {
+    width: min(8.5rem, 38%);
+    height: 13rem;
+  }
+
+  .shop-brand-lockup {
+    width: 100%;
+  }
+
+  .shop-kicker {
+    margin-top: 1.4rem;
+  }
+
+  .shop-hero-copy h1 {
+    max-width: 100%;
+    font-size: clamp(2.55rem, 14vw, 4.1rem);
+    line-height: 0.96;
+  }
+
+  .shop-hero-actions a {
+    width: 100%;
+  }
+
+  .shop-hero-card {
+    width: 100%;
+  }
+
+  .shop-hero-shirt {
+    min-height: 21rem;
+  }
+
+  .shop-product-grid,
+  .shop-product-grid-three {
+    grid-template-columns: 1fr;
+  }
+
+  .shop-product-media {
+    min-height: 17rem;
+  }
+
+  .shop-shirt-stage {
+    padding-inline: 0.7rem;
+  }
+
+  .shop-shirt {
+    width: min(7.2rem, 35vw);
+    height: 10rem;
+  }
+
+  .shop-shirt::before {
+    left: -2.5rem;
+  }
+
+  .shop-shirt::after {
+    right: -2.5rem;
+  }
+
+  .shop-product-meta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+}

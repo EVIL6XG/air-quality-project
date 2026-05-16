@@ -1,4 +1,4 @@
-import numpy as np
+﻿import numpy as np
 import pandas as pd
 
 FEATURE_COLS = [
@@ -58,3 +58,4 @@ def build_features(df: pd.DataFrame) -> pd.DataFrame:
     df = _add_rolling_features(df)
     df = df.dropna(subset=FEATURE_COLS).reset_index(drop=True)
     return df
+
