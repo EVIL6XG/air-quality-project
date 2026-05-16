@@ -25,6 +25,7 @@ const urbanHoodieSrc = "/airq-hoodie-urban-clean-v2.png"
 const urbanMaskSrc = "/airq-mask-urban-product.png"
 const smogMaskSrc = "/airq-mask-smog-product.png"
 const maskFeatureSrc = "/airq-mask-feature.png"
+const driveMonitorWhiteSrc = "/airq-drive-monitor-white.png"
 
 const airProducts = [
   {
@@ -64,7 +65,7 @@ const airProducts = [
     price: "$29",
     badge: "Clean Air Product",
     colors: ["#111827", "#6b7280", "#c4b5fd"],
-    image: urbanMaskSrc,
+    images: [urbanMaskSrc, maskFeatureSrc],
     imagePosition: "center",
   },
   {
@@ -74,8 +75,19 @@ const airProducts = [
     price: "$49",
     badge: "PM2.5 Protection",
     colors: ["#e5e7eb", "#111827", "#a78bfa"],
-    image: smogMaskSrc,
+    images: [smogMaskSrc, maskFeatureSrc],
     imagePosition: "center",
+  },
+  {
+    name: "AirQ Drive Monitor",
+    description: "Smart in-car air quality monitor for healthier every drive.",
+    type: "Car air quality device",
+    price: "$119",
+    badge: "Smart Device",
+    colors: ["#111827", "#7dd3fc", "#a78bfa"],
+    image: driveMonitorWhiteSrc,
+    imagePosition: "center",
+    visualClassName: "shop-drive-monitor-visual",
   },
 ]
 
@@ -126,12 +138,21 @@ const conceptPoints = [
   ["Healthier city, better future", ShieldCheck],
 ]
 
-const ProductVisual = ({ item }) => {
+const ProductVisual = ({ item, imageIndex = 0 }) => {
   const Icon = item.icon || Shirt
+
+  if (item.images) {
+    const imageSrc = item.images[imageIndex]
+    return (
+      <div className={`shop-real-product-visual ${item.type?.toLowerCase().includes("mask") ? "shop-mask-product-visual" : ""} ${item.visualClassName || ""}`}>
+        <img src={imageSrc} alt={`${item.name} product mockup`} style={{ objectPosition: item.imagePosition }} />
+      </div>
+    )
+  }
 
   if (item.image) {
     return (
-      <div className={`shop-real-product-visual ${item.type?.toLowerCase().includes("mask") ? "shop-mask-product-visual" : ""}`}>
+      <div className={`shop-real-product-visual ${item.type?.toLowerCase().includes("mask") ? "shop-mask-product-visual" : ""} ${item.visualClassName || ""}`}>
         <img src={item.image} alt={`${item.name} product mockup`} style={{ objectPosition: item.imagePosition }} />
       </div>
     )
@@ -181,51 +202,86 @@ const ProductVisual = ({ item }) => {
   )
 }
 
-const ProductCard = ({ item, index, onPreview }) => (
-  <motion.article
-    className="shop-product-card"
-    initial={{ opacity: 0, y: 28 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.25 }}
-    transition={{ duration: 0.55, delay: index * 0.06 }}
-  >
-    <button
-      type="button"
-      className="shop-product-media"
-      onClick={() => onPreview(item)}
-      aria-label={`Open ${item.name} preview`}
+const ProductCard = ({ item, index, onPreview }) => {
+  const [imageIndex, setImageIndex] = useState(0)
+  const hasMultipleImages = item.images && item.images.length > 1
+
+  const openPreview = () => onPreview(item)
+
+  const handleMediaKeyDown = (e) => {
+    if (e.target !== e.currentTarget) return
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault()
+      openPreview()
+    }
+  }
+
+  const nextImage = (e) => {
+    e.stopPropagation()
+    setImageIndex((prev) => (prev + 1) % item.images.length)
+  }
+
+  return (
+    <motion.article
+      className="shop-product-card"
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.55, delay: index * 0.06 }}
     >
-      <span className="shop-eco-badge">
-        <Leaf size={13} />
-        {item.badge}
-      </span>
-      <ProductVisual item={item} />
-      <span className="shop-preview-hint">Open preview</span>
-    </button>
-
-    <div className="shop-product-body">
-      <div>
-        <p className="shop-product-type">{item.type}</p>
-        <h3>{item.name}</h3>
-        <p>{item.description}</p>
+      <div
+        role="button"
+        tabIndex={0}
+        className="shop-product-media"
+        onClick={openPreview}
+        onKeyDown={handleMediaKeyDown}
+        aria-label={`Open ${item.name} preview`}
+      >
+        <span className="shop-eco-badge">
+          <Leaf size={13} />
+          {item.badge}
+        </span>
+        <ProductVisual item={item} imageIndex={imageIndex} />
+        {hasMultipleImages && (
+          <div className="shop-image-indicators">
+            {item.images.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                className={`shop-indicator ${idx === imageIndex ? "active" : ""}`}
+                onClick={nextImage}
+                aria-label={`View image ${idx + 1}`}
+              />
+            ))}
+          </div>
+        )}
+        <span className="shop-preview-hint">Open preview</span>
       </div>
 
-      <div className="shop-product-meta">
-        <div className="shop-color-row" aria-label={`${item.name} color options`}>
-          {item.colors.map((color) => (
-            <span key={color} style={{ backgroundColor: color }} />
-          ))}
+      <div className="shop-product-body">
+        <div>
+          <p className="shop-product-type">{item.type}</p>
+          <h3>{item.name}</h3>
+          <p>{item.description}</p>
         </div>
-        <strong>{item.price}</strong>
-      </div>
 
-      <button type="button" className="shop-add-button">
-        <Plus size={16} />
-        Add to cart
-      </button>
-    </div>
-  </motion.article>
-)
+        <div className="shop-product-meta">
+          <div className="shop-color-row" aria-label={`${item.name} color options`}>
+            {item.colors.map((color) => (
+              <span key={color} style={{ backgroundColor: color }} />
+            ))}
+          </div>
+          <strong>{item.price}</strong>
+        </div>
+
+        <button type="button" className="shop-add-button">
+          <Plus size={16} />
+          Add to cart
+        </button>
+      </div>
+    </motion.article>
+  )
+}
 
 export default function ShopPage() {
   const [previewProduct, setPreviewProduct] = useState(null)
@@ -293,9 +349,6 @@ export default function ShopPage() {
         <div className="shop-section-heading">
           <p>Air quality products</p>
           <h2>Tools for monitoring healthier spaces.</h2>
-        </div>
-        <div className="shop-mask-feature">
-          <img src={maskFeatureSrc} alt="AirQ mask collection for urban air protection" />
         </div>
         <div className="shop-product-grid shop-product-grid-three">
           {airProducts.map((item, index) => (

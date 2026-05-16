@@ -21,9 +21,7 @@ const HistoricalAnalyticsPage = lazy(
 const ChatPage = lazy(() => import("./pages/ChatPage"))
 const ProfilePage = lazy(() => import("./pages/ProfilePage"))
 const SettingsPage = lazy(() => import("./pages/SettingsPage"))
-const NewsPage = lazy(() => import("./pages/NewsPage"))
 const LearnPage = lazy(() => import("./pages/LearnPage"))
-const SupportPage = lazy(() => import("./pages/SupportPage"))
 const ShopPage = lazy(() => import("./pages/ShopPage"))
 
 function PrivateRoute({ children }) {
@@ -56,9 +54,7 @@ export default function App() {
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/info/:slug" element={<InfoPage />} />
-          <Route path="/news" element={<NewsPage />} />
           <Route path="/learn" element={<LearnPage />} />
-          <Route path="/support" element={<SupportPage />} />
           <Route path="/shop" element={<ShopPage />} />
 
           <Route path="/dashboard" element={protect(<DashboardPage />)} />

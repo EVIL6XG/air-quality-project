@@ -11,7 +11,6 @@ import {
   LogOut,
   Map,
   Moon,
-  Newspaper,
   Search,
   Settings,
   ShoppingBag,
@@ -38,9 +37,7 @@ const navItems = [
 ]
 
 const publicItems = [
-  { to: "/news", label: "News", icon: Newspaper },
   { to: "/learn", label: "Learn", icon: BookOpen },
-  { to: "/support", label: "Support", icon: HeartPulse },
   { to: "/shop", label: "Shop", icon: ShoppingBag },
 ]
 

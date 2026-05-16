@@ -28,57 +28,76 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <main className="premium-shell relative min-h-screen overflow-hidden px-4 py-8 text-text-primary">
-      <div className="hero-atmosphere" />
+    <main
+      className="relative grid min-h-screen place-items-center overflow-hidden px-4 py-8 text-white"
+      style={{
+        backgroundImage:
+          "radial-gradient(circle at 30% 20%, rgb(124 58 237 / 0.5), transparent 28rem), radial-gradient(circle at 72% 28%, rgb(34 211 238 / 0.28), transparent 24rem), linear-gradient(180deg, rgb(8 10 35 / 0.36), rgb(2 6 23 / 0.92)), url('/almaty-mountain-smog-hero.png')",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+      }}
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgb(255_255_255/0.08),transparent_18rem)]" />
+      <div className="absolute inset-0 bg-slate-950/25 backdrop-blur-[1px]" />
 
-      <div className="relative z-10 mx-auto flex min-h-[calc(100vh-4rem)] max-w-xl items-center">
+      <div className="relative z-10 w-full max-w-[27rem]">
+        <Link to="/" className="mx-auto mb-5 flex w-fit items-center justify-center">
+          <img
+            src="/image (3).png"
+            alt="AirQ"
+            className="h-20 w-32 object-contain drop-shadow-[0_0_24px_rgb(167_139_250/0.42)]"
+          />
+        </Link>
+
         <form
           onSubmit={handleSubmit}
-          className="w-full rounded-[2rem] border border-white/15 bg-white/10 p-6 shadow-lg backdrop-blur-2xl sm:p-10"
+          className="rounded-[1.6rem] border border-white/14 bg-slate-950/58 p-6 shadow-[0_28px_90px_rgb(0_0_0/0.42)] backdrop-blur-2xl sm:p-8"
         >
-          <Link to="/login" className="mb-8 inline-flex items-center gap-2 text-sm text-text-secondary hover:text-text-primary">
+          <Link to="/login" className="mb-7 inline-flex items-center gap-2 text-sm font-medium text-white/62 transition-colors hover:text-white">
             <ArrowLeft size={16} />
             Back to login
           </Link>
 
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-accent">
-            Account recovery
-          </p>
-          <h1 className="mt-3 font-display text-4xl font-bold">Forgot password?</h1>
-          <p className="mt-3 text-sm leading-6 text-text-secondary">
-            Enter your email address and AirQ will send a password recovery link.
-          </p>
+          <div className="mb-7 text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
+              Account recovery
+            </p>
+            <h1 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
+              Forgot password?
+            </h1>
+            <p className="mt-2 text-sm leading-6 text-white/62">
+              Enter your email and we will send a recovery link.
+            </p>
+          </div>
 
-          <label className="mt-8 block">
-            <span className="mb-2 block text-sm font-medium text-text-secondary">
-              Email
-            </span>
-            <span className="flex h-12 items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 backdrop-blur-xl transition-colors focus-within:border-accent/60">
-              <Mail size={17} className="text-accent" />
+          <label className="block">
+            <span className="sr-only">Email</span>
+            <span className="flex h-12 items-center gap-3 rounded-xl border border-white/10 bg-white/[0.07] px-4 text-white/80 shadow-inner shadow-white/5 transition-colors focus-within:border-cyan-300/60">
+              <Mail size={17} className="text-cyan-200" />
               <input
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
-                placeholder="Enter your email"
+                placeholder="Email address"
                 type="email"
-                className="w-full bg-transparent text-sm outline-none placeholder:text-text-secondary"
+                className="w-full bg-transparent text-sm outline-none placeholder:text-white/40"
               />
             </span>
           </label>
 
           {message && (
-            <p className="mt-4 rounded-2xl border border-lime-300/20 bg-lime-400/10 px-4 py-3 text-sm text-lime-100">
+            <p className="mt-4 rounded-xl border border-lime-300/20 bg-lime-400/10 px-4 py-3 text-sm text-lime-100">
               {message}
             </p>
           )}
 
           {devResetUrl && (
-            <p className="mt-3 break-words rounded-2xl border border-cyan-300/20 bg-cyan-400/10 px-4 py-3 text-sm text-cyan-100">
+            <p className="mt-3 break-words rounded-xl border border-cyan-300/20 bg-cyan-400/10 px-4 py-3 text-sm text-cyan-100">
               Local development reset link: <Link className="underline" to={devResetUrl.replace(window.location.origin, "")}>{devResetUrl}</Link>
             </p>
           )}
 
           {error && (
-            <p className="mt-4 rounded-2xl border border-red-300/20 bg-red-400/10 px-4 py-3 text-sm text-red-200">
+            <p className="mt-4 rounded-xl border border-red-300/20 bg-red-400/10 px-4 py-3 text-sm text-red-100">
               {error}
             </p>
           )}
@@ -86,7 +105,7 @@ export default function ForgotPasswordPage() {
           <Button
             type="submit"
             disabled={forgotPassword.isPending}
-            className="mt-6 h-12 w-full rounded-2xl"
+            className="mt-6 h-12 w-full rounded-xl border-0 bg-gradient-to-r from-violet-500 via-purple-500 to-cyan-400 text-white shadow-[0_18px_42px_rgb(124_58_237/0.34)] transition-transform hover:scale-[1.01]"
           >
             {forgotPassword.isPending ? "Sending..." : "Send recovery email"}
           </Button>

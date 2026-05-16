@@ -2032,6 +2032,45 @@ body {
   transform: translateY(0);
 }
 
+.shop-product-media:focus-visible {
+  outline: 3px solid rgb(167 139 250 / 0.78);
+  outline-offset: -3px;
+}
+
+.shop-image-indicators {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  bottom: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.42rem;
+  transform: translateX(-50%);
+}
+
+.shop-indicator {
+  width: 0.6rem;
+  height: 0.6rem;
+  border: 1px solid rgb(255 255 255 / 0.66);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.36);
+  box-shadow: 0 8px 20px rgb(15 23 42 / 0.22);
+  cursor: pointer;
+  padding: 0;
+  transition: width 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.shop-indicator.active {
+  width: 1.45rem;
+  border-color: rgb(216 180 254 / 0.92);
+  background: #a78bfa;
+}
+
+.shop-indicator:focus-visible {
+  outline: 2px solid rgb(255 255 255 / 0.9);
+  outline-offset: 3px;
+}
+
 .shop-product-body {
   display: grid;
   gap: 1rem;
@@ -2127,6 +2166,19 @@ body {
   object-fit: contain;
   filter: drop-shadow(0 24px 48px rgb(0 0 0 / 0.22));
   transform: scale(1.02);
+}
+
+.shop-drive-monitor-visual {
+  background: #ffffff;
+}
+
+.shop-drive-monitor-visual img {
+  width: min(108%, 30rem);
+  max-width: none;
+  height: 92%;
+  object-fit: contain;
+  filter: drop-shadow(0 22px 34px rgb(15 23 42 / 0.16));
+  transform: none;
 }
 
 .shop-preview-overlay {

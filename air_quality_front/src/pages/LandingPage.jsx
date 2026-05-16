@@ -35,12 +35,6 @@ const navMenus = {
     ["AQI and PM2.5", "/info/aqi-and-pm25"],
     ["Forecasting model", "/info/forecasting-model"],
   ],
-  News: [
-    ["Latest updates", "/info/latest-updates"],
-    ["Air quality alerts", "/info/air-quality-alerts"],
-    ["City reports", "/info/city-reports"],
-    ["Research notes", "/info/research-notes"],
-  ],
   Learn: [
     ["What is AQI?", "/info/what-is-aqi"],
     ["PM2.5 explained", "/info/pm25-explained"],
@@ -52,12 +46,6 @@ const navMenus = {
     ["Sensitive groups", "/info/sensitive-groups"],
     ["School safety", "/info/school-safety"],
     ["Urban environment", "/info/urban-environment"],
-  ],
-  Support: [
-    ["Help center", "/info/help-center"],
-    ["Contact AirQ", "/info/contact-airq"],
-    ["Report an issue", "/info/report-an-issue"],
-    ["Partnerships", "/info/partnerships"],
   ],
   Shop: [
     ["AirQ store", "/shop"],

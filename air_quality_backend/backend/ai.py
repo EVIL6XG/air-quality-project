@@ -118,7 +118,13 @@ functions = [
 ]
 
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+
+def get_openai_client():
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        return None
+    return OpenAI(api_key=api_key)
 
 
 def ai_answer(user_message: str):
@@ -142,6 +148,10 @@ AQI в выбранном районе на {date}: **{aqi}**
 и тебе известны район и дата — сразу отвечай.
 Если нет — вежливо попроси указать недостающую информацию.
     """
+
+    client = get_openai_client()
+    if client is None:
+        return "AI chat is not configured yet. Set OPENAI_API_KEY to enable free-form AI answers."
 
     response = client.chat.completions.create(
         model="gpt-4o-mini",
@@ -183,5 +193,4 @@ AQI в выбранном районе на {date}: **{aqi}**
         return "Извините, я не смог обработать запрос. Уточните, пожалуйста, район и дату."
 
     return text
-
 
