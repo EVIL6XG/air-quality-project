@@ -12,3 +12,6 @@ scikit-learn
 joblib
 xgboost
 lightgbm
+torch
+stripe
+pytest

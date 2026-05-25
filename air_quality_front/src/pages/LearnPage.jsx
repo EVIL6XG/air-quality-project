@@ -1,48 +1,49 @@
 import { Link } from "react-router-dom"
-import { ArrowLeft, BookOpen, Wind } from "lucide-react"
-
-const modules = [
-  "What AQI means and how it is interpreted",
-  "Why PM2.5 is important for public health",
-  "How machine learning forecasts pollution values",
-  "How to read district-level environmental dashboards",
-]
+import { ArrowLeft, BookMarked, Clock3, Home } from "lucide-react"
+import { learnTopics } from "@/data/learn-topics"
 
 export default function LearnPage() {
   return (
-    <main className="airq-info-page">
+    <main className="airq-info-page min-h-screen text-white">
       <div className="airq-info-bg" />
-      <section className="airq-info-card">
-        <Link className="airq-info-back" to="/">
-          <ArrowLeft size={16} />
-          Back to AirQ
-        </Link>
-        <p className="airq-info-kicker">Learn</p>
-        <h1>Air quality knowledge base</h1>
-        <p className="airq-info-lead">
-          A compact learning section that explains AQI, PM2.5, forecasts, and
-          health recommendations in clear language.
-        </p>
-
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
-          {modules.map((module) => (
-            <div
-              key={module}
-              className="rounded-2xl border border-white/10 bg-white/[0.06] p-5"
-            >
-              <div className="mb-4 inline-flex rounded-xl bg-cyan-300/10 p-2 text-cyan-200">
-                {module.includes("PM2.5") ? (
-                  <Wind size={18} />
-                ) : (
-                  <BookOpen size={18} />
-                )}
-              </div>
-              <h2 className="font-display text-lg font-semibold text-white">
-                {module}
-              </h2>
-            </div>
-          ))}
+      <section className="relative z-10 mx-auto w-[min(100%-1.25rem,980px)] py-8">
+        <div className="mb-4 flex flex-wrap gap-2">
+          <Link className="airq-info-back" to="/">
+            <ArrowLeft size={16} />
+            Back
+          </Link>
+          <Link className="airq-info-back" to="/">
+            <Home size={16} />
+            Home
+          </Link>
         </div>
+
+        <section className="rounded-2xl border border-white/10 bg-slate-950/60 p-4 shadow-[0_26px_80px_rgba(2,8,23,.45)] md:p-6">
+          <div className="mb-3 flex items-center gap-2 text-slate-200">
+            <BookMarked size={16} className="text-indigo-200" />
+            <h1 className="text-lg font-semibold">Learn by topic</h1>
+          </div>
+          <p className="mb-5 text-sm leading-7 text-slate-300/85">
+            Open a full article and read the topic in a continuous scientific style.
+          </p>
+
+          <div className="space-y-3">
+            {learnTopics.map((topic) => (
+              <Link
+                key={topic.slug}
+                to={`/learn/${topic.slug}`}
+                className="block rounded-xl border border-white/10 bg-white/[0.04] p-4 transition hover:border-cyan-200/40 hover:bg-white/[0.06]"
+              >
+                <h2 className="text-xl font-semibold text-white">{topic.title}</h2>
+                <p className="mt-2 text-sm leading-7 text-slate-200/90">{topic.summary}</p>
+                <p className="mt-3 inline-flex items-center gap-1 text-xs text-slate-300/90">
+                  <Clock3 size={13} />
+                  {topic.readTime || "5 min read"}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </section>
       </section>
     </main>
   )

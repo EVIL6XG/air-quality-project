@@ -11,7 +11,7 @@ from db import get_connection
 load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
 
 SECRET_KEY = "change-this-secret-in-production"
-RESET_TOKEN_MINUTES = 30
+RESET_TOKEN_MINUTES = 24 * 60
 
 
 def _decode_token(token):
@@ -148,6 +148,15 @@ def request_password_reset(email):
         return {"sent": True}, None
 
     user_id = row[0]
+    # Invalidate all previous active reset tokens for this user.
+    cur.execute(
+        """
+        UPDATE password_reset_tokens
+        SET used_at = CURRENT_TIMESTAMP
+        WHERE user_id = %s AND used_at IS NULL
+        """,
+        [user_id],
+    )
     token = secrets.token_urlsafe(32)
     expires_at = datetime.datetime.utcnow() + datetime.timedelta(minutes=RESET_TOKEN_MINUTES)
 

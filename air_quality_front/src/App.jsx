@@ -22,7 +22,11 @@ const ChatPage = lazy(() => import("./pages/ChatPage"))
 const ProfilePage = lazy(() => import("./pages/ProfilePage"))
 const SettingsPage = lazy(() => import("./pages/SettingsPage"))
 const LearnPage = lazy(() => import("./pages/LearnPage"))
+const LearnTopicPage = lazy(() => import("./pages/LearnTopicPage"))
+const ImpactPage = lazy(() => import("./pages/ImpactPage"))
 const ShopPage = lazy(() => import("./pages/ShopPage"))
+const CartPage = lazy(() => import("./pages/CartPage"))
+const OrdersPage = lazy(() => import("./pages/OrdersPage"))
 
 function PrivateRoute({ children }) {
   const { isAuthenticated } = useAuth()
@@ -55,7 +59,11 @@ export default function App() {
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/info/:slug" element={<InfoPage />} />
           <Route path="/learn" element={<LearnPage />} />
+          <Route path="/learn/:slug" element={<LearnTopicPage />} />
+          <Route path="/impact" element={<ImpactPage />} />
           <Route path="/shop" element={<ShopPage />} />
+          <Route path="/shop/cart" element={protect(<CartPage />)} />
+          <Route path="/shop/orders" element={protect(<OrdersPage />)} />
 
           <Route path="/dashboard" element={protect(<DashboardPage />)} />
           <Route path="/map" element={protect(<MapPage />)} />

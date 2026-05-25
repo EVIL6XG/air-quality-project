@@ -7,7 +7,6 @@ import {
   BellRing,
   CircleGauge,
   Leaf,
-  Map,
   Plus,
   Recycle,
   ShieldCheck,
@@ -15,6 +14,17 @@ import {
   Wind,
   X,
 } from "lucide-react"
+import { useAddToCart } from "@/features/shop/queries"
+import { useAuth } from "@/providers/auth-provider"
+import { Button } from "@/components/ui/Button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 
 const logoSrc = "/airq.png"
 const lookbookSrc = "/airq-shop-lookbook.png"
@@ -29,6 +39,7 @@ const driveMonitorWhiteSrc = "/airq-drive-monitor-white.png"
 
 const airProducts = [
   {
+    productId: 101,
     name: "AirQ Pocket Monitor",
     description: "Compact PM2.5 and AQI companion for daily city movement.",
     type: "Portable air quality device",
@@ -39,6 +50,7 @@ const airProducts = [
     variant: "device",
   },
   {
+    productId: 102,
     name: "AirQ Home Sensor",
     description: "Minimal indoor station for tracking home air and ventilation.",
     type: "Smart home sensor",
@@ -49,6 +61,7 @@ const airProducts = [
     variant: "sensor",
   },
   {
+    productId: 103,
     name: "District Alert Plan",
     description: "Personal AQI notifications for Bostandyk, Medeu, Auezov, Alatau, and Jetisu.",
     type: "AirQ digital service",
@@ -59,6 +72,7 @@ const airProducts = [
     variant: "app",
   },
   {
+    productId: 104,
     name: "AirQ Urban Mask",
     description: "Breathable everyday protection for city movement and polluted commute hours.",
     type: "Reusable urban mask",
@@ -69,6 +83,7 @@ const airProducts = [
     imagePosition: "center",
   },
   {
+    productId: 105,
     name: "Smog Protection Mask",
     description: "Advanced filtration mask for heavy pollution days with replaceable filters.",
     type: "High-efficiency filter mask",
@@ -79,6 +94,7 @@ const airProducts = [
     imagePosition: "center",
   },
   {
+    productId: 106,
     name: "AirQ Drive Monitor",
     description: "Smart in-car air quality monitor for healthier every drive.",
     type: "Car air quality device",
@@ -93,6 +109,7 @@ const airProducts = [
 
 const merchProducts = [
   {
+    productId: 201,
     name: "Smog Cloud Edition",
     description: "Black recycled hoodie with contour smog graphics and Almaty awareness print.",
     type: "Recycled cotton hoodie",
@@ -105,6 +122,7 @@ const merchProducts = [
     imagePosition: "center",
   },
   {
+    productId: 202,
     name: "Mountain Air Edition",
     description: "Soft white sweatshirt with mountain artwork and clean-air back message.",
     type: "Organic recycled sweatshirt",
@@ -117,6 +135,7 @@ const merchProducts = [
     imagePosition: "center",
   },
   {
+    productId: 203,
     name: "Urban AQI Edition",
     description: "Dark sweatshirt with city-map AQI graphics and monitoring message.",
     type: "Recycled performance sweatshirt",
@@ -133,7 +152,7 @@ const merchProducts = [
 const conceptPoints = [
   ["Clean air for everyone", CircleGauge],
   ["Data you can trust", Leaf],
-  ["Local focus, Almaty standards", Map],
+  ["Local focus, city standards", ShieldCheck],
   ["Community driven", Recycle],
   ["Healthier city, better future", ShieldCheck],
 ]
@@ -202,7 +221,7 @@ const ProductVisual = ({ item, imageIndex = 0 }) => {
   )
 }
 
-const ProductCard = ({ item, index, onPreview }) => {
+const ProductCard = ({ item, index, onPreview, onAddToCart, adding }) => {
   const [imageIndex, setImageIndex] = useState(0)
   const hasMultipleImages = item.images && item.images.length > 1
 
@@ -274,9 +293,9 @@ const ProductCard = ({ item, index, onPreview }) => {
           <strong>{item.price}</strong>
         </div>
 
-        <button type="button" className="shop-add-button">
+        <button type="button" className="shop-add-button" onClick={() => onAddToCart(item)} disabled={adding}>
           <Plus size={16} />
-          Add to cart
+          {adding ? "Adding..." : "Add to cart"}
         </button>
       </div>
     </motion.article>
@@ -285,6 +304,17 @@ const ProductCard = ({ item, index, onPreview }) => {
 
 export default function ShopPage() {
   const [previewProduct, setPreviewProduct] = useState(null)
+  const [authPromptOpen, setAuthPromptOpen] = useState(false)
+  const { isAuthenticated } = useAuth()
+  const addToCart = useAddToCart()
+
+  const handleAddToCart = (item) => {
+    if (!isAuthenticated) {
+      setAuthPromptOpen(true)
+      return
+    }
+    addToCart.mutate({ product_id: item.productId, qty: 1 })
+  }
 
   return (
     <main className="airq-shop-page">
@@ -296,6 +326,9 @@ export default function ShopPage() {
           <ArrowLeft size={16} />
           Back to AirQ
         </Link>
+        <div className="mt-3 flex gap-2">
+          <Link to="/shop/cart" className="shop-back">Cart</Link>
+        </div>
 
         <motion.div
           className="shop-lookbook"
@@ -352,7 +385,14 @@ export default function ShopPage() {
         </div>
         <div className="shop-product-grid shop-product-grid-three">
           {airProducts.map((item, index) => (
-            <ProductCard key={item.name} item={item} index={index} onPreview={setPreviewProduct} />
+            <ProductCard
+              key={item.name}
+              item={item}
+              index={index}
+              onPreview={setPreviewProduct}
+              onAddToCart={handleAddToCart}
+              adding={addToCart.isPending}
+            />
           ))}
         </div>
       </section>
@@ -360,17 +400,24 @@ export default function ShopPage() {
       <section id="merch" className="shop-section">
         <div className="shop-section-heading">
           <p>Branded eco-friendly merchandise</p>
-          <h2>Recycled T-shirts with AirQ Almaty identity.</h2>
+          <h2>Recycled Hoodies with AirQ Almaty identity.</h2>
         </div>
         <div className="shop-product-grid">
           {merchProducts.map((item, index) => (
-            <ProductCard key={item.name} item={item} index={index} onPreview={setPreviewProduct} />
+            <ProductCard
+              key={item.name}
+              item={item}
+              index={index}
+              onPreview={setPreviewProduct}
+              onAddToCart={handleAddToCart}
+              adding={addToCart.isPending}
+            />
           ))}
         </div>
       </section>
 
       <section className="shop-footer-cta">
-        <Map size={24} />
+        <ShieldCheck size={24} />
         <h2>Wear the message. Track the air. Protect the city.</h2>
         <p>
           Every product connects the AirQ mission with everyday awareness across Almaty.
@@ -428,6 +475,25 @@ export default function ShopPage() {
           </motion.div>
         </div>
       )}
+
+      <Dialog open={authPromptOpen} onOpenChange={setAuthPromptOpen}>
+        <DialogContent className="airq-auth-dialog">
+          <DialogHeader>
+            <DialogTitle>Sign in required</DialogTitle>
+            <DialogDescription>
+              Please sign in to add products to cart and place orders.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="secondary" onClick={() => setAuthPromptOpen(false)}>
+              Cancel
+            </Button>
+            <Button asChild>
+              <Link to="/login">Go to login</Link>
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </main>
   )
 }

@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
 import {
@@ -36,10 +37,12 @@ const navMenus = {
     ["Forecasting model", "/info/forecasting-model"],
   ],
   Learn: [
-    ["What is AQI?", "/info/what-is-aqi"],
-    ["PM2.5 explained", "/info/pm25-explained"],
-    ["Health recommendations", "/info/health-recommendations"],
-    ["How forecasts work", "/info/how-forecasts-work"],
+    ["What is AQI?", "/learn/what-is-aqi"],
+    ["PM2.5 Explained", "/learn/pm25-explained"],
+    ["Health Recommendations", "/learn/health-recommendations"],
+    ["How Forecasting Works", "/learn/how-forecasting-works"],
+    ["Pollution Sources", "/learn/pollution-sources"],
+    ["Protect Yourself During Smog", "/learn/protect-during-smog"],
   ],
   Impact: [
     ["Public health", "/info/public-health"],
@@ -54,6 +57,91 @@ const navMenus = {
   ],
 }
 
+const quickLinks = [
+  { title: "Dashboard", href: "/dashboard", section: "App" },
+  { title: "Map", href: "/map", section: "App" },
+  { title: "Forecast", href: "/forecast", section: "App" },
+  { title: "Analytics", href: "/analytics", section: "App" },
+  { title: "AI Chat", href: "/chat", section: "App" },
+  { title: "Profile", href: "/profile", section: "Account" },
+  { title: "Settings", href: "/settings", section: "Account" },
+  { title: "Log in", href: "/login", section: "Auth" },
+  { title: "Sign up", href: "/signup", section: "Auth" },
+  { title: "Forgot password", href: "/forgot-password", section: "Auth" },
+]
+
+const searchIndex = [
+  ...Object.entries(navMenus).flatMap(([section, items]) =>
+    items.map(([title, href]) => ({ title, href, section })),
+  ),
+  ...quickLinks,
+]
+
+function LandingSearch() {
+  const [open, setOpen] = useState(false)
+  const [query, setQuery] = useState("")
+
+  const normalizedQuery = query.trim().toLowerCase()
+  const results = useMemo(() => {
+    if (!normalizedQuery) return searchIndex
+    return searchIndex.filter(
+      (item) =>
+        item.title.toLowerCase().includes(normalizedQuery) ||
+        item.section.toLowerCase().includes(normalizedQuery),
+    )
+  }, [normalizedQuery])
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <button className="airq-search" type="button" aria-label="Search">
+          <Search size={17} />
+        </button>
+      </DialogTrigger>
+      <DialogContent className="airq-auth-dialog">
+        <DialogHeader>
+          <DialogTitle>Search in AirQ</DialogTitle>
+          <DialogDescription>
+            Find pages, topics, and product sections.
+          </DialogDescription>
+        </DialogHeader>
+
+        <label className="mt-4 block">
+          <span className="sr-only">Search query</span>
+          <span className="flex h-11 items-center gap-2 rounded-xl border border-white/12 bg-white/[0.08] px-3">
+            <Search size={16} className="text-white/70" />
+            <input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Search..."
+              className="w-full bg-transparent text-sm outline-none placeholder:text-white/45"
+            />
+          </span>
+        </label>
+
+        <div className="mt-4 max-h-72 space-y-2 overflow-y-auto pr-1">
+          {results.length === 0 && (
+            <p className="rounded-lg border border-white/12 bg-white/[0.06] px-3 py-2 text-sm text-white/75">
+              No results found.
+            </p>
+          )}
+          {results.map((item) => (
+            <Link
+              key={`${item.section}-${item.title}-${item.href}`}
+              to={item.href}
+              onClick={() => setOpen(false)}
+              className="block rounded-lg border border-white/12 bg-white/[0.06] px-3 py-2 transition-colors hover:bg-white/[0.12]"
+            >
+              <p className="text-sm font-medium">{item.title}</p>
+              <p className="text-xs text-white/65">{item.section}</p>
+            </Link>
+          ))}
+        </div>
+      </DialogContent>
+    </Dialog>
+  )
+}
+
 function LandingHeader() {
   return (
     <header className="airq-header">
@@ -62,26 +150,38 @@ function LandingHeader() {
       </Link>
 
       <nav className="airq-nav" aria-label="Main navigation">
-        <button className="airq-search" type="button" aria-label="Search">
-          <Search size={17} />
-        </button>
-        {Object.entries(navMenus).map(([label, items]) => (
-          <DropdownMenu key={label}>
-            <DropdownMenuTrigger className="airq-nav-link" type="button">
-              {label}
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="center" className="airq-menu-content">
-              <DropdownMenuLabel className="airq-menu-label">
-                {label === "AirQ" ? "AirQ platform" : label}
-              </DropdownMenuLabel>
-              {items.map(([item, href]) => (
-                <DropdownMenuItem key={item} asChild className="airq-menu-item">
-                  <Link to={href}>{item}</Link>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        ))}
+        <LandingSearch />
+        {Object.entries(navMenus).map(([label, items]) => {
+          if (label === "Learn" || label === "Impact") {
+            return (
+              <Link
+                key={label}
+                to={label === "Learn" ? "/learn" : "/impact"}
+                className={label === "Learn" ? "airq-nav-link airq-learn-trigger" : "airq-nav-link"}
+              >
+                {label}
+              </Link>
+            )
+          }
+
+          return (
+            <DropdownMenu key={label}>
+              <DropdownMenuTrigger className="airq-nav-link" type="button">
+                {label}
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="center" className="airq-menu-content">
+                <DropdownMenuLabel className="airq-menu-label">
+                  {label === "AirQ" ? "AirQ platform" : label}
+                </DropdownMenuLabel>
+                {items.map(([item, href]) => (
+                  <DropdownMenuItem key={item} asChild className="airq-menu-item">
+                    <Link to={href}>{item}</Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )
+        })}
       </nav>
 
       <AuthDialog />
@@ -191,12 +291,12 @@ function HeroContent() {
         <p>Breathe safer. Know your city.</p>
         <div className="airq-hero-actions">
           <Button asChild size="lg">
-            <Link to="/dashboard">
+            <Link to="/login">
               Explore air quality <ArrowRight size={18} />
             </Link>
           </Button>
           <Button asChild size="lg" variant="secondary">
-            <Link to="/map">View Almaty map</Link>
+            <Link to="/login">View Almaty map</Link>
           </Button>
         </div>
       </motion.div>

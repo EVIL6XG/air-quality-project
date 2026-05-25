@@ -1,10 +1,5 @@
-import {
-  Download,
-  Filter,
-  LineChart,
-  TrendingDown,
-  TrendingUp,
-} from "lucide-react"
+import { Download, Filter, LineChart, TrendingDown, TrendingUp } from "lucide-react"
+import { useMemo } from "react"
 import {
   Area,
   AreaChart,
@@ -17,39 +12,101 @@ import {
 
 import { Button } from "@/components/ui/Button"
 import { Card } from "@/components/ui/card"
-
-const trendData = [
-  { date: "Mon", bostandyk: 18, medeu: 22, auezov: 28 },
-  { date: "Tue", bostandyk: 21, medeu: 24, auezov: 31 },
-  { date: "Wed", bostandyk: 26, medeu: 29, auezov: 35 },
-  { date: "Thu", bostandyk: 23, medeu: 27, auezov: 33 },
-  { date: "Fri", bostandyk: 19, medeu: 21, auezov: 25 },
-  { date: "Sat", bostandyk: 16, medeu: 19, auezov: 22 },
-  { date: "Sun", bostandyk: 17, medeu: 20, auezov: 24 },
-]
-
-const insights = [
-  {
-    title: "Weekly trend",
-    value: "-12%",
-    description: "Average PM2.5 is lower than the previous week.",
-    icon: TrendingDown,
-  },
-  {
-    title: "Highest district",
-    value: "Auezov",
-    description: "The district shows the strongest evening peaks.",
-    icon: TrendingUp,
-  },
-  {
-    title: "Report ready",
-    value: "CSV",
-    description: "Historical data can be exported for diploma analysis.",
-    icon: Download,
-  },
-]
+import { usePM25History } from "@/features/aqi/queries"
+import { useDistricts } from "@/features/districts/queries"
+import { useFilterStore } from "@/stores/filters-store"
 
 export default function HistoricalAnalyticsPage() {
+  const districtId = useFilterStore((state) => state.selectedDistrictId)
+  const setDistrictId = useFilterStore((state) => state.setSelectedDistrictId)
+  const fromDate = useFilterStore((state) => state.dateFrom)
+  const toDate = useFilterStore((state) => state.dateTo)
+  const setDateRange = useFilterStore((state) => state.setDateRange)
+  const { data: districts = [] } = useDistricts()
+  const { data: pmHistory = [] } = usePM25History(districtId)
+
+  const trendData = useMemo(() => {
+    return pmHistory
+      .filter((item) => item.date && item.pm25_median != null)
+      .filter((item) => {
+        const date = item.date.slice(0, 10)
+        if (fromDate && date < fromDate) return false
+        if (toDate && date > toDate) return false
+        return true
+      })
+      .map((item) => ({
+        date: item.date.slice(0, 10),
+        pm25: Number(item.pm25_median),
+      }))
+  }, [pmHistory, fromDate, toDate])
+
+  const districtName =
+    districts.find((district) => String(district.id) === String(districtId))?.name || "District"
+
+  const insights = useMemo(() => {
+    const empty = [
+      {
+        title: "Trend",
+        value: "N/A",
+        description: "Not enough data for trend comparison.",
+        icon: TrendingDown,
+      },
+      {
+        title: "Selected district",
+        value: districtName,
+        description: "Current analytics scope.",
+        icon: TrendingUp,
+      },
+      {
+        title: "Records",
+        value: "0",
+        description: "No PM2.5 rows in selected range.",
+        icon: Download,
+      },
+    ]
+
+    if (trendData.length < 2) return empty
+
+    const recent = trendData.slice(-7)
+    const previous = trendData.slice(-14, -7)
+    const avgRecent =
+      recent.reduce((sum, item) => sum + Number(item.pm25 || 0), 0) / Math.max(recent.length, 1)
+    const avgPrevious =
+      previous.reduce((sum, item) => sum + Number(item.pm25 || 0), 0) / Math.max(previous.length, 1)
+
+    let deltaPct = 0
+    if (avgPrevious > 0) {
+      deltaPct = ((avgRecent - avgPrevious) / avgPrevious) * 100
+    }
+
+    const trendIcon = deltaPct <= 0 ? TrendingDown : TrendingUp
+    const trendValue = `${deltaPct >= 0 ? "+" : ""}${deltaPct.toFixed(1)}%`
+
+    return [
+      {
+        title: "Weekly trend",
+        value: trendValue,
+        description:
+          deltaPct <= 0
+            ? "Average PM2.5 is lower than previous window."
+            : "Average PM2.5 is higher than previous window.",
+        icon: trendIcon,
+      },
+      {
+        title: "Selected district",
+        value: districtName,
+        description: "Analytics and chart data are scoped to current district.",
+        icon: TrendingUp,
+      },
+      {
+        title: "Report rows",
+        value: String(trendData.length),
+        description: "Rows currently visible in the filtered dataset.",
+        icon: Download,
+      },
+    ]
+  }, [trendData, districtName])
+
   return (
     <div className="space-y-6">
       <section className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
@@ -67,11 +124,34 @@ export default function HistoricalAnalyticsPage() {
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <Button variant="secondary">
+          <select
+            value={districtId}
+            onChange={(event) => setDistrictId(event.target.value)}
+            className="rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-sm"
+          >
+            {districts.map((district) => (
+              <option key={district.id} value={String(district.id)}>
+                {district.name}
+              </option>
+            ))}
+          </select>
+          <input
+            type="date"
+            value={fromDate}
+            onChange={(event) => setDateRange(event.target.value, toDate)}
+            className="rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-sm"
+          />
+          <input
+            type="date"
+            value={toDate}
+            onChange={(event) => setDateRange(fromDate, event.target.value)}
+            className="rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-sm"
+          />
+          <Button variant="secondary" disabled>
             <Filter size={16} />
             Filters
           </Button>
-          <Button>
+          <Button disabled>
             <Download size={16} />
             Export
           </Button>
@@ -108,7 +188,7 @@ export default function HistoricalAnalyticsPage() {
           <div>
             <Card.Title>District comparison</Card.Title>
             <Card.Description>
-              Example weekly PM2.5 profile for selected districts.
+              PM2.5 history for {districtName}.
             </Card.Description>
           </div>
           <LineChart className="text-accent" size={22} />
@@ -138,24 +218,10 @@ export default function HistoricalAnalyticsPage() {
                 }}
               />
               <Area
-                dataKey="bostandyk"
-                name="Bostandyk"
+                dataKey="pm25"
+                name="PM2.5"
                 stroke="#22d3ee"
                 fill="url(#historyBostandyk)"
-                strokeWidth={2}
-              />
-              <Area
-                dataKey="medeu"
-                name="Medeu"
-                stroke="#34d399"
-                fill="url(#historyMedeu)"
-                strokeWidth={2}
-              />
-              <Area
-                dataKey="auezov"
-                name="Auezov"
-                stroke="#a78bfa"
-                fill="transparent"
                 strokeWidth={2}
               />
             </AreaChart>

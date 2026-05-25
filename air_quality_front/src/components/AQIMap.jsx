@@ -101,11 +101,11 @@ export default function AQIMap({
     list.forEach((district) => {
       if (!DISTRICT_COORDS[district.district]) return
 
-      const value = district.pm25_median || district.aqi || 0
+      const value = district.aqi ?? 0
       const [lat, lng] = DISTRICT_COORDS[district.district]
 
-      points.push([lat, lng, Math.min(value / 150, 1)])
-      districtList.push({ name: district.district, lat, lng, pm25: value })
+      points.push([lat, lng, Math.min(value / 300, 1)])
+      districtList.push({ name: district.district, lat, lng, aqi: value })
     })
 
     return { districts: districtList, heatPoints: points }
@@ -165,8 +165,8 @@ export default function AQIMap({
             layer.bindPopup(`
               <div style="min-width:170px;line-height:1.7;font-family:Inter,system-ui">
                 <div style="font-weight:800;font-size:13px">${name} district</div>
-                <div>PM2.5: <b>${district.pm25} ug/m3</b></div>
-                <div style="color:${getColor(district.pm25)};font-weight:700">${getLabel(district.pm25)}</div>
+              <div>AQI: <b>${district.aqi}</b></div>
+                <div style="color:${getColor(district.aqi)};font-weight:700">${getLabel(district.aqi)}</div>
                 <div style="font-size:11px;color:#64748b;margin-top:4px">Click to open dashboard</div>
               </div>
             `)
@@ -199,8 +199,8 @@ export default function AQIMap({
             center={[district.lat, district.lng]}
             radius={10}
             pathOptions={{
-              color: getColor(district.pm25),
-              fillColor: getColor(district.pm25),
+              color: getColor(district.aqi),
+              fillColor: getColor(district.aqi),
               fillOpacity: 0.72,
               opacity: 0.95,
               weight: 2,

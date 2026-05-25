@@ -15,6 +15,10 @@ sys.path.insert(0, _ML_DIR)
 from data_loader import load_district_data   # noqa: E402
 from features import FEATURE_COLS            # noqa: E402
 
+HYBRID_MODEL_WEIGHT = 0.72
+HYBRID_TREND_WEIGHT = 0.20
+HYBRID_SEASONAL_WEIGHT = 0.08
+
 
 # ── Model loader ──────────────────────────────────────────────────────────────
 
@@ -70,6 +74,39 @@ def _future_feature_vector(next_date, history: list, last_stats: dict) -> list:
     ]
 
 
+def _damped_linear_slope(values: list, window: int = 14) -> float:
+    tail = np.array(values[-window:] if len(values) >= window else values, dtype=float)
+    if len(tail) < 3:
+        return 0.0
+    x = np.arange(len(tail), dtype=float)
+    slope, _ = np.polyfit(x, tail, 1)
+    return float(slope) * 0.7
+
+
+def _hybrid_prediction(model_pred: float, history: list, horizon_step: int) -> float:
+    last = float(history[-1])
+    lag7 = float(history[-7]) if len(history) >= 7 else last
+    rolling7 = float(np.mean(history[-7:] if len(history) >= 7 else history))
+
+    trend_slope = _damped_linear_slope(history, window=14)
+    trend_component = last + trend_slope * horizon_step
+    seasonal_component = 0.6 * lag7 + 0.4 * rolling7
+
+    combined = (
+        HYBRID_MODEL_WEIGHT * model_pred
+        + HYBRID_TREND_WEIGHT * trend_component
+        + HYBRID_SEASONAL_WEIGHT * seasonal_component
+    )
+
+    recent = np.array(history[-30:] if len(history) >= 30 else history, dtype=float)
+    mu = float(np.mean(recent))
+    sigma = float(np.std(recent, ddof=1)) if len(recent) > 1 else 0.0
+    lo = max(0.0, mu - 3.0 * sigma)
+    hi = mu + 3.0 * sigma if sigma > 0 else max(mu * 1.5, combined, 1.0)
+
+    return float(np.clip(combined, lo, hi))
+
+
 # ── Public API ────────────────────────────────────────────────────────────────
 
 def get_forecast(district_id, days: int = 7):
@@ -105,15 +142,17 @@ def get_forecast(district_id, days: int = 7):
     for i in range(days):
         next_date = last_date + pd.Timedelta(days=i + 1)
         feat_vec  = _future_feature_vector(next_date, history, last_stats)
-        pred      = float(model.predict(np.array([feat_vec]))[0])
+        raw_pred  = float(model.predict(np.array([feat_vec]))[0])
+        pred      = _hybrid_prediction(raw_pred, history, i + 1)
         pred      = max(0.0, pred)
         history.append(pred)  # feed prediction back for next iteration
 
+        interval_scale = np.sqrt(i + 1)
         results.append({
             'date':           next_date.strftime('%Y-%m-%d'),
-            'pm25_predicted': round(pred, 1),
-            'pm25_lower':     round(max(0.0, pred - 1.96 * residuals_std), 1),
-            'pm25_upper':     round(pred + 1.96 * residuals_std, 1),
+            'pm25_predicted': round(pred, 2),
+            'pm25_lower':     round(max(0.0, pred - 1.96 * residuals_std * interval_scale), 2),
+            'pm25_upper':     round(pred + 1.96 * residuals_std * interval_scale, 2),
         })
 
     return results

@@ -28,17 +28,22 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <main
-      className="relative grid min-h-screen place-items-center overflow-hidden px-4 py-8 text-white"
-      style={{
-        backgroundImage:
-          "radial-gradient(circle at 30% 20%, rgb(124 58 237 / 0.5), transparent 28rem), radial-gradient(circle at 72% 28%, rgb(34 211 238 / 0.28), transparent 24rem), linear-gradient(180deg, rgb(8 10 35 / 0.36), rgb(2 6 23 / 0.92)), url('/almaty-mountain-smog-hero.png')",
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-      }}
-    >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgb(255_255_255/0.08),transparent_18rem)]" />
-      <div className="absolute inset-0 bg-slate-950/25 backdrop-blur-[1px]" />
+    <main className="premium-shell relative grid min-h-screen place-items-center overflow-hidden px-4 py-8 text-white">
+      <div
+        className="absolute inset-0"
+        aria-hidden="true"
+        style={{
+          background:
+            "radial-gradient(ellipse at 18% 14%, rgb(56 189 248 / 0.2), transparent 36rem), radial-gradient(ellipse at 78% 8%, rgb(14 116 144 / 0.28), transparent 34rem), linear-gradient(160deg, #071423 0%, #0b2034 42%, #12314a 100%)",
+        }}
+      />
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div className="airq-sky" />
+        <div className="auth-smog auth-smog-a" />
+        <div className="auth-smog auth-smog-b" />
+        <div className="auth-smog auth-smog-c" />
+        <div className="auth-haze" />
+      </div>
 
       <div className="relative z-10 w-full max-w-[27rem]">
         <Link to="/" className="mx-auto mb-5 flex w-fit items-center justify-center">
@@ -105,7 +110,7 @@ export default function ForgotPasswordPage() {
           <Button
             type="submit"
             disabled={forgotPassword.isPending}
-            className="mt-6 h-12 w-full rounded-xl border-0 bg-gradient-to-r from-violet-500 via-purple-500 to-cyan-400 text-white shadow-[0_18px_42px_rgb(124_58_237/0.34)] transition-transform hover:scale-[1.01]"
+            className="mt-6 h-12 w-full rounded-xl border-0 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-500 text-white shadow-[0_18px_42px_rgb(56_189_248/0.34)] transition-transform hover:scale-[1.01]"
           >
             {forgotPassword.isPending ? "Sending..." : "Send recovery email"}
           </Button>

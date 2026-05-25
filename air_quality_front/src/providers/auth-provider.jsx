@@ -2,22 +2,40 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext(null);
 
-export function AuthProvider({ children }) {
-  const [token, setToken] = useState(
-    localStorage.getItem("token")
-  );
+function isTokenValid(token) {
+  if (!token || token === "null" || token === "undefined") return false;
 
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    !!localStorage.getItem("token")
+  const parts = token.split(".");
+  if (parts.length !== 3) return true;
+
+  try {
+    const payload = JSON.parse(atob(parts[1]));
+    if (!payload?.exp) return true;
+    return payload.exp * 1000 > Date.now();
+  } catch {
+    return false;
+  }
+}
+
+export function AuthProvider({ children }) {
+  const [token, setToken] = useState(localStorage.getItem("token"));
+
+  const [isAuthenticated, setIsAuthenticated] = useState(() =>
+    isTokenValid(localStorage.getItem("token")),
   );
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
 
-    if (storedToken) {
+    if (isTokenValid(storedToken)) {
       setToken(storedToken);
       setIsAuthenticated(true);
+      return;
     }
+
+    localStorage.removeItem("token");
+    setToken(null);
+    setIsAuthenticated(false);
   }, []);
 
   const login = (newToken) => {
@@ -33,7 +51,7 @@ export function AuthProvider({ children }) {
     setToken(null);
     setIsAuthenticated(false);
 
-    window.location = "/login";
+    window.location = "/";
   };
 
   return (

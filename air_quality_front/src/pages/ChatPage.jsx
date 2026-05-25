@@ -1,24 +1,45 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSendChat } from "@/features/chat/queries";
+import { useLatestAQI } from "@/features/aqi/queries";
 import { Send } from "lucide-react";
 import { Button } from "../components/ui/Button";
-
-const initialMessages = [
-  {
-    role: "bot",
-    text:
-      "Hello! I am the AirQ AI Assistant. Ask me a question about Almaty air quality, AQI, PM2.5, a district, or a specific date, and I will help you understand the data.",
-  },
-];
 
 export default function ChatPage() {
   const navigate = useNavigate();
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState(initialMessages);
+  const [messages, setMessages] = useState([]);
+  const { data: latestAqi = [] } = useLatestAQI();
   const chatMutation = useSendChat();
 const loading = chatMutation.isPending;
   const bottomRef = useRef(null);
+  const greetedRef = useRef(false);
+
+  useEffect(() => {
+    if (greetedRef.current) return
+    const entries = Array.isArray(latestAqi) ? latestAqi : []
+    if (!entries.length) {
+      const today = new Date().toISOString().slice(0, 10)
+      setMessages([
+        {
+          role: "bot",
+          text: `Hello! I am the AirQ AI Assistant. Data snapshot date: ${today}. Ask me about AQI, PM2.5, districts, or forecast interpretation.`,
+        },
+      ])
+      greetedRef.current = true
+      return
+    }
+
+    const worst = entries.reduce((acc, row) => (row.aqi > acc.aqi ? row : acc), entries[0])
+    const date = worst?.date || new Date().toISOString().slice(0, 10)
+    setMessages([
+      {
+        role: "bot",
+        text: `Hello! I am the AirQ AI Assistant. Latest AQI snapshot (${date}): highest district is ${worst.district} with AQI ${worst.aqi}. Ask me about PM2.5, AQI by date, districts, or forecast interpretation.`,
+      },
+    ])
+    greetedRef.current = true
+  }, [latestAqi])
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });

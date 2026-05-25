@@ -22,7 +22,7 @@ const legend = [
 ]
 
 export default function MapPage() {
-  const [selectedDate, setSelectedDate] = useState("2024-12-24")
+  const [selectedDate, setSelectedDate] = useState(() => new Date().toISOString().slice(0, 10))
   const [isFullscreen, setIsFullscreen] = useState(false)
 
   if (isFullscreen) {
