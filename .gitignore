@@ -5,3 +5,6 @@ air_quality_backend/.env
 .venv/
 .venv312/
 
+
+air_quality_front/.env.development
+
